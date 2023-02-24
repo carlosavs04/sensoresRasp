@@ -1,16 +1,25 @@
-import Adafruit_DHT
+from ultrasonico import UltrasonicSensor
+from temperatura import temperatura
+class main:
+    def main(self):
+        print("----Bienvenido----")
+        # sensor=UltrasonicSensor(trigger_pin=23, echo_pin=24)
+        # while True:
+        #     distancia = sensor.measure_distance()
+        #     print("Distancia: {} cm".format(distancia))
+        #     if distancia >= 1:
+        #         break
+        # sensor.cleanup()
+        sensor=temperatura(5)
+        hum, temp = sensor.lectura()
+        if hum is not None and temp is not None:
+            print('Temperatura={0:0.1f}*C  Humedad={1:0.1f}%'.format(temp, hum))
+        else:
+            print('Error al leer datos del sensor')
 
-# Define el tipo de sensor que estás utilizando
-sensor = Adafruit_DHT.DHT11
 
-# Define el número del pin GPIO al que está conectado el sensor
-pin = 5
+if __name__ == "__main__":
+    main().main()
 
-# Intenta leer los datos del sensor
-humedad, temperatura = Adafruit_DHT.read_retry(sensor, pin)
 
-# Verifica si la lectura fue exitosa
-if humedad is not None and temperatura is not None:
-    print('Temperatura={0:0.1f}°C  Humedad={1:0.1f}%'.format(temperatura, humedad))
-else:
-    print('Error al leer datos del sensor.')
+
