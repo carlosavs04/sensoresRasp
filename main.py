@@ -11,11 +11,12 @@ class main:
         #         break
         # sensor.cleanup()
         sensor=temperatura(5)
-        hum, temp = sensor.lectura()
-        if hum is not None and temp is not None:
-            print('Temperatura={0:0.1f}*C  Humedad={1:0.1f}%'.format(temp, hum))
-        else:
-            print('Error al leer datos del sensor')
+        while True:
+            hum, temp = sensor.lectura()
+            if hum is not None and temp is not None:
+                print('Temperatura={0:0.1f}*C  Humedad={1:0.1f}%'.format(temp, hum))
+            else:
+                print('Error al leer datos del sensor')
 
 
 if __name__ == "__main__":
