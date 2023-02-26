@@ -1,22 +1,78 @@
 from ultrasonico import UltrasonicSensor
 from temperatura import temperatura
+from led import led
+import keyboard
+import threading
+
 class main:
     def main(self):
-        print("----Bienvenido----")
-        # sensor=UltrasonicSensor(trigger_pin=23, echo_pin=24)
-        # while True:
-        #     distancia = sensor.measure_distance()
-        #     print("Distancia: {} cm".format(distancia))
-        #     if distancia >= 1:
-        #         break
-        # sensor.cleanup()
-        sensor=temperatura(5)
+        opcion = ""
+        while opcion != "5":
+            opcion = self.menuGeneral()
+            if opcion == "1":
+                self.ultrasonico()
+            elif opcion == "2":
+                self.temperatura()
+            elif opcion == "3":
+                self.led()
+            elif opcion == "5":
+                # Salir
+                print("Saliendo del sistema...")
+                break
+            else:
+                print("Opción inválida, intente de nuevo.")
+                input("Presione Enter para continuar...")
+
+    def detectar_enter(self):
+        self.enter_pressed = False
+        keyboard.wait("enter")  # espera hasta que se presione Enter
+        self.enter_pressed = True
+    def ultrasonico(self):
+        sensor = UltrasonicSensor(trigger_pin=23, echo_pin=24)
+        enter_thread = threading.Thread(target=self.detectar_enter)
+        enter_thread.start()
+        while True:
+            distancia = sensor.medirDistancia()
+            print("Distancia: {} cm".format(distancia))
+            if self.enter_pressed:  # si se ha detectado la pulsación de Enter, romper el ciclo
+                print("Enter presionado, deteniendo lectura de sensores")
+                sensor.liberarPin()
+                return self.main()
+
+    def temperatura(self):
+        sensor = temperatura(5)
+        enter_thread = threading.Thread(target=self.detectar_enter)
+        enter_thread.start()
         while True:
             hum, temp = sensor.lectura()
             if hum is not None and temp is not None:
                 print('Temperatura={0:0.1f}*C  Humedad={1:0.1f}%'.format(temp, hum))
             else:
                 print('Error al leer datos del sensor')
+            if self.enter_pressed:  # si se ha detectado la pulsación de Enter, romper el ciclo
+                print("Enter presionado, deteniendo lectura de sensores")
+                return self.main()
+
+    def led(self):
+        enter_thread = threading.Thread(target=self.detectar_enter)
+        enter_thread.start()
+        while True:
+            led.encender(17)
+            if self.enter_pressed:  # si se ha detectado la pulsación de Enter, romper el ciclo
+                print("Enter presionado, deteniendo lectura de sensores")
+                return self.main()
+
+    def juntos(self):
+        pass
+
+    def menu(self):
+        print("------------Menu------------")
+        print("1. Ultrasonico")
+        print("2. Temperatura")
+        print("3. Led")
+        # print("4. Juntos")
+        print("5. Salir")
+        print("----------------------------")
 
 
 if __name__ == "__main__":
