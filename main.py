@@ -8,7 +8,7 @@ class main:
     def main(self):
         opcion = ""
         while opcion != "5":
-            opcion = self.menuGeneral()
+            opcion = self.menu()
             if opcion == "1":
                 self.ultrasonico()
             elif opcion == "2":
@@ -73,6 +73,8 @@ class main:
         # print("4. Juntos")
         print("5. Salir")
         print("----------------------------")
+        opcion = input("Seleccione una opción: ")
+        return opcion
 
 
 if __name__ == "__main__":
