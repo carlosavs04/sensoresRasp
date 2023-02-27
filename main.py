@@ -31,14 +31,12 @@ class main:
         self.enter_pressed = True
     def ultrasonico(self):
         sensor = UltrasonicSensor(trigger_pin=23, echo_pin=24)
-        enter_thread = threading.Thread(target=self.detectar_enter)
-        enter_thread.start()
         while True:
             distancia = sensor.medirDistancia()
             print("Distancia: {} cm".format(distancia))
-            opcio=input()
-
-            if opcio=="s":  # si se ha detectado la pulsación de Enter, romper el ciclo
+            if input(
+                    "Presione Enter para detener la lectura del sensor, o escriba 'q' para volver al menú principal: ") == "":
+                print("Enter presionado, deteniendo lectura de sensores")
                 sensor.liberarPin()
                 return self.main()
 
@@ -80,7 +78,7 @@ class main:
             print("Distancia: {} cm".format(distancia))
             opcio = input()
 
-            if opcio == "s":  # si se ha detectado la pulsación de Enter, romper el ciclo
+            if self.enter_pressed:  # si se ha detectado la pulsación de Enter, romper el ciclo
                 sensorUlt.liberarPin()
                 return self.main()
 
