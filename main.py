@@ -58,13 +58,24 @@ class main:
         enter_thread.start()
         led1= led(17)
         while True:
-            led1.encender()
-            if self.enter_pressed:  # si se ha detectado la pulsación de Enter, romper el ciclo
-                print("Enter presionado, deteniendo lectura de sensores")
+            if led1.encender() == 1:  # si se ha detectado la pulsación de Enter, romper el ciclo
                 return self.main()
 
     def juntos(self):
-        pass
+        sensor = temperatura(5)
+        sensorUlt = UltrasonicSensor(trigger_pin=23, echo_pin=24)
+        enter_thread = threading.Thread(target=self.detectar_enter)
+        enter_thread.start()
+        while True:
+            hum, temp = sensor.lectura()
+            distancia = sensorUlt.medirDistancia()
+
+            if hum is not None and temp is not None:
+                print('Temperatura={0:0.1f}*C  Humedad={1:0.1f}%'.format(temp, hum))
+            print("Distancia: {} cm".format(distancia))
+            if self.enter_pressed:  # si se ha detectado la pulsación de Enter, romper el ciclo
+                print("Enter presionado, deteniendo lectura de sensores")
+                return self.main()
 
     def menu(self):
         print("------------Menu------------")

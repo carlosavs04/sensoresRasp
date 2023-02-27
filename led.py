@@ -21,6 +21,8 @@ class led:
                     time.sleep(0.5)
                     GPIO.output(self.led_pin, GPIO.LOW)
                     time.sleep(0.5)
+            elif user_input=="3":
+                return 1
             elif user_input == "0":
                 print("Apagando LED")
                 GPIO.output(self.led_pin, GPIO.LOW)
