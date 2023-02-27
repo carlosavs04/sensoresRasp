@@ -10,20 +10,20 @@ class led:
 
     def encender(self):
         try:
-            teclas = keyboard.record(until='enter')
-            if teclas=="1":
+            user_input = input("Ingrese un valor (0, 1 o 2): ")
+            if user_input == "1":
                 print("Encendiendo LED")
                 GPIO.output(self.led_pin, GPIO.HIGH)
-            elif teclas == "2":
+            elif user_input == "2":
                 print("Parpadeando LED")
                 for i in range(3):
                     GPIO.output(self.led_pin, GPIO.HIGH)
                     time.sleep(0.5)
                     GPIO.output(self.led_pin, GPIO.LOW)
                     time.sleep(0.5)
-            elif teclas=="3":
+            elif user_input=="3":
                 return 1
-            elif teclas == "0":
+            elif user_input == "0":
                 print("Apagando LED")
                 GPIO.output(self.led_pin, GPIO.LOW)
             else:
