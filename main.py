@@ -15,6 +15,8 @@ class main:
                 self.temperatura()
             elif opcion == "3":
                 self.led()
+            elif opcion == "4":
+                self.juntos()
             elif opcion == "5":
                 # Salir
                 print("Saliendo del sistema...")
@@ -82,7 +84,7 @@ class main:
         print("1. Ultrasonico")
         print("2. Temperatura")
         print("3. Led")
-        # print("4. Juntos")
+        print("4. Juntos")
         print("5. Salir")
         print("----------------------------")
         opcion = input("Seleccione una opción: ")
