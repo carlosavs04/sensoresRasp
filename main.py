@@ -76,6 +76,9 @@ class main:
             if hum is not None and temp is not None:
                 print('Temperatura={0:0.1f}*C  Humedad={1:0.1f}%'.format(temp, hum))
             print("Distancia: {} cm".format(distancia))
+            if self.enter_pressed:  # si se ha detectado la pulsación de Enter, romper el ciclo
+                print("Enter presionado, deteniendo lectura de sensores")
+                return self.main()
 
 
 
