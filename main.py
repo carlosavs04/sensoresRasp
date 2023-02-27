@@ -36,8 +36,9 @@ class main:
         while True:
             distancia = sensor.medirDistancia()
             print("Distancia: {} cm".format(distancia))
-            if self.enter_pressed:  # si se ha detectado la pulsación de Enter, romper el ciclo
-                print("Enter presionado, deteniendo lectura de sensores")
+            opcio=input()
+
+            if opcio=="s":  # si se ha detectado la pulsación de Enter, romper el ciclo
                 sensor.liberarPin()
                 return self.main()
 
@@ -76,8 +77,10 @@ class main:
             if hum is not None and temp is not None:
                 print('Temperatura={0:0.1f}*C  Humedad={1:0.1f}%'.format(temp, hum))
             print("Distancia: {} cm".format(distancia))
-            if self.enter_pressed:  # si se ha detectado la pulsación de Enter, romper el ciclo
-                print("Enter presionado, deteniendo lectura de sensores")
+            opcio = input()
+
+            if opcio == "s":  # si se ha detectado la pulsación de Enter, romper el ciclo
+                sensorUlt.liberarPin()
                 return self.main()
 
 
