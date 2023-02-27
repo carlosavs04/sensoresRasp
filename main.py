@@ -48,7 +48,7 @@ class main:
             if hum is not None and temp is not None:
                 print('Temperatura={0:0.1f}*C  Humedad={1:0.1f}%'.format(temp, hum))
             else:
-                print('Error al leer datos del sensor')
+                print('Leyendo...')
             if self.enter_pressed:  # si se ha detectado la pulsación de Enter, romper el ciclo
                 print("Enter presionado, deteniendo lectura de sensores")
                 return self.main()
@@ -56,8 +56,9 @@ class main:
     def led(self):
         enter_thread = threading.Thread(target=self.detectar_enter)
         enter_thread.start()
+        led1= led(17)
         while True:
-            led.encender(17)
+            led1.encender()
             if self.enter_pressed:  # si se ha detectado la pulsación de Enter, romper el ciclo
                 print("Enter presionado, deteniendo lectura de sensores")
                 return self.main()
