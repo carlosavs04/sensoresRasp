@@ -66,6 +66,8 @@ class main:
     def juntos(self):
         sensor = temperatura(5)
         sensorUlt = UltrasonicSensor(trigger_pin=23, echo_pin=24)
+        led1= led(17)
+
         enter_thread = threading.Thread(target=self.detectar_enter)
         enter_thread.start()
         while True:
@@ -75,6 +77,8 @@ class main:
             if hum is not None and temp is not None:
                 print('Temperatura={0:0.1f}*C  Humedad={1:0.1f}%'.format(temp, hum))
             print("Distancia: {} cm".format(distancia))
+            if led1.encender() == 1:  # si se ha detectado la pulsación de Enter, romper el ciclo
+                return self.main()
 
 
     def menu(self):
