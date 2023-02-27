@@ -52,8 +52,9 @@ class main:
                 print('Temperatura={0:0.1f}*C  Humedad={1:0.1f}%'.format(temp, hum))
             else:
                 print('Leyendo...')
-            if self.enter_pressed:  # si se ha detectado la pulsación de Enter, romper el ciclo
-                print("Enter presionado, deteniendo lectura de sensores")
+            opcio = input()
+
+            if opcio == "s":  # si se ha detectado la pulsación de Enter, romper el ciclo
                 return self.main()
 
     def led(self):
