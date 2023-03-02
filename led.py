@@ -12,18 +12,17 @@ class Led:
         self.stop_event = threading.Event()
 
     def encender(self):
-        print("Iniciando LED")
-        self.stop_event.clear()
-        self.thread = threading.Thread(target=self.led_loop)
-        self.thread.start()
+        print("Encendiendo LED")
+        GPIO.output(self.led_pin, GPIO.HIGH)
 
+    def apagar(self):
+        print("Apagando LED")
+        GPIO.output(self.led_pin, GPIO.LOW)
     def led_loop(self):
         while not self.stop_event.is_set():
-            print("Encendiendo LED")
-            GPIO.output(self.led_pin, GPIO.HIGH)
+
             time.sleep(5)
-            print("Apagando LED")
-            GPIO.output(self.led_pin, GPIO.LOW)
+
 
         GPIO.output(self.led_pin, GPIO.LOW)
         self.thread = None
