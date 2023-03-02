@@ -74,6 +74,7 @@ class main:
 
         enter_thread = threading.Thread(target=self.detectar_enter)
         enter_thread.start()
+        self.bandera=1
         while True:
             hum, temp = sensor.lectura()
             distancia = sensorUlt.medirDistancia()
