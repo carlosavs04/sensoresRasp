@@ -19,26 +19,12 @@ class Led:
 
     def led_loop(self):
         while not self.stop_event.is_set():
-            user_input = input("Ingrese un valor (0, 1 o 2), o presione Enter para salir: ")
-            if user_input == "1":
-                print("Encendiendo LED")
-                GPIO.output(self.led_pin, GPIO.HIGH)
-            elif user_input == "2":
-                print("Parpadeando LED")
-                for i in range(3):
-                    GPIO.output(self.led_pin, GPIO.HIGH)
-                    time.sleep(0.5)
-                    GPIO.output(self.led_pin, GPIO.LOW)
-                    time.sleep(0.5)
-            elif user_input == "0":
-                print("Apagando LED")
-                GPIO.output(self.led_pin, GPIO.LOW)
-            elif user_input == "3":
-                break
-            elif not user_input:  # si se presiona enter (string vacío), detener el loop
-                break
-            else:
-                print("Valor inválido")
+            print("Encendiendo LED")
+            GPIO.output(self.led_pin, GPIO.HIGH)
+            time.sleep(5)
+            print("Apagando LED")
+            GPIO.output(self.led_pin, GPIO.LOW)
+
         GPIO.output(self.led_pin, GPIO.LOW)
         self.thread = None
 
