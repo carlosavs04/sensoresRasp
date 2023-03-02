@@ -78,11 +78,14 @@ class main:
             hum, temp = sensor.lectura()
             distancia = sensorUlt.medirDistancia()
             print("Distancia: {} cm".format(distancia))
-            led1.encender()
-            self.bandera=1
+
+
             if self.bandera==1:
                 led1.apagar()
                 self.bandera=0
+            else:
+                led1.encender()
+                self.bandera = 1
             if hum is not None and temp is not None:
                 print('Temperatura={0:0.1f}*C  Humedad={1:0.1f}%'.format(temp, hum))
             print("Distancia: {} cm".format(distancia))

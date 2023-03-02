@@ -18,6 +18,7 @@ class Led:
     def apagar(self):
         print("Apagando LED")
         GPIO.output(self.led_pin, GPIO.LOW)
+
     def led_loop(self):
         while not self.stop_event.is_set():
 
