@@ -1,7 +1,8 @@
+import time
+
 from ultrasonico import UltrasonicSensor
 from temperatura import temperatura
-from led import led
-import keyboard
+from led import Led
 import threading
 
 class main:
@@ -25,9 +26,16 @@ class main:
                 print("Opción inválida, intente de nuevo.")
                 input("Presione Enter para continuar...")
 
+
     def detectar_enter(self):
-        input()  # espera hasta que se presione Enter
-        self.enter_pressed = True
+        self.enter_pressed = False
+        while True:
+            entrada = input()
+            if not entrada:
+                self.enter_pressed = True
+                break
+
+
 
     def ultrasonico(self):
         sensor = UltrasonicSensor(trigger_pin=23, echo_pin=24)
@@ -58,15 +66,12 @@ class main:
     def led(self):
         enter_thread = threading.Thread(target=self.detectar_enter)
         enter_thread.start()
-        led1= led(17)
-        while True:
-            if led1.encender() == 1:  # si se ha detectado la pulsación de Enter, romper el ciclo
-                return self.main()
+        led1 = Led(17)
+        led1.encender()
 
     def juntos(self):
         sensor = temperatura(5)
         sensorUlt = UltrasonicSensor(trigger_pin=23, echo_pin=24)
-
         enter_thread = threading.Thread(target=self.detectar_enter)
         enter_thread.start()
         while True:
@@ -81,6 +86,14 @@ class main:
                 print("Enter presionado, deteniendo lectura de sensores")
                 return self.main()
 
+    def pruebas(self):
+        while True:
+            print("Probando ... ")
+            time.sleep(1)
+            if self.enter_pressed:
+                print("Enter presionado, deteniendo lectura de sensores")
+                return self.main()
+
 
 
     def menu(self):
@@ -88,7 +101,7 @@ class main:
         print("1. Ultrasonico")
         print("2. Temperatura")
         print("3. Led")
-        print("4. Juntos")
+        print("4. Sensores")
         print("5. Salir")
         print("----------------------------")
         opcion = input("Seleccione una opción: ")
@@ -96,7 +109,7 @@ class main:
 
 
 if __name__ == "__main__":
-    main().main()
+    main().pruebas()
 
 
 
