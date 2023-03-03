@@ -35,7 +35,7 @@ class main:
                         print("|{:<20} | {:<25} | {:<10} | {:<10} | {:<5}|".format(data["nombre"], data["tipo"],
                                                                                         data["valores"][0],
                                                                                         data["fecha"],
-                                                                                        data["pines"][1]))
+                                                                                        data["pines"][0]))
                     elif len(data["pines"]) == 2:
                         print(
                             "|{:<20} | {:<25} | {:<10} | {:<10} | {:<2} {:<2}|".format(data["nombre"],
@@ -44,13 +44,11 @@ class main:
                                                                                             data["fecha"],
                                                                                             data["pines"][0],
                                                                                             data["pines"][1]))
-
-
                 elif len(data["valores"]) == 2:
                     if len(data["pines"]) == 1:
                         print("|{:<20} | {:<25} | {:<4} {:<5} | {:<10} | {:<5}|".format(data["nombre"], data["tipo"], data["valores"][0],
                                                                       data["valores"][1],
-                                                                      data["fecha"], data["pines"][1]))
+                                                                      data["fecha"], data["pines"][0]))
                     elif len(data["pines"]) == 2:
                         print(
                             "|{:<20} | {:<25} | {:<4} {:<5} | {:<10} | {:<2} {:<2}|".format(data["nombre"], data["tipo"], data["valores"][0],
