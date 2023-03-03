@@ -33,6 +33,9 @@ class sensor:
         elif self.path=="led":
             self.tipo="Led"
             self.led1 = Led(self.pin[0])
+            if self.led1.led.is_lit:
+                self.led1.led.close()
+                self.led1 = Led(self.pin[0])
             stat = self.led1.toggle()
             valores.append(stat)
         return valores
