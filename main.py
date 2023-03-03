@@ -28,7 +28,7 @@ class main:
         while True:
 
             for sens in sensores:
-                print(sens)
+                print(sens.lectura())
                 # data=json.loads(sens.lectura())
                 #
                 # print("{:<20} {:<20} {:<20} {:<20} {:<20}".format(data["nombre"], data["tipo"], data["valores"], data["fecha"],data["pines"]))
