@@ -33,9 +33,7 @@ class sensor:
         elif self.path=="led":
             self.tipo="Led"
             led1 = Led(self.pin[0])
-            stat = led1.is_lit
-            led1.toggle()  # Cambiar el estado del LED
-            valores.append(stat)
+            stat = led1.loop()
             valores.append(stat)
         return valores
 
