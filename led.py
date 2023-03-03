@@ -1,20 +1,20 @@
 import time
-import gpiozero
+from gpiozero import LED
 
 
 class Led:
     def __init__(self, pin):
         self.pin = pin
-        self.led = gpiozero.LED(self.pin)
+        self.led = LED(self.pin)
     def toggle(self):
-        if self.led.active_high:
+        if self.led.is_active:
+            self.led.off()
+            return 0
+
+        else:
             self.led.on()
             return 1
 
-
-        else:
-            self.led.off()
-            return 0
 
 
 if __name__ == "__main__":
