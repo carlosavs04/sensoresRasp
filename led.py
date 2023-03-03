@@ -19,10 +19,13 @@ class Led:
             self.estado_actual = True
             return 1
 
-
+    def estado(self):
+        if self.led.is_lit:
+            return 1
+        else:
+            return 0
 
 
 if __name__ == "__main__":
     led1=Led(17)
-    while True:
-        led1.led.on()
+    led1.estado()
