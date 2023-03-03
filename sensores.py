@@ -10,7 +10,8 @@ class sensor:
         self.path=path
         self.pin=pin
         self.nombre=nombre
-
+        if nombre == "":
+            self.nombre = self.path
     def tipoSensor(self):
         valores=[]
         self.tipo=""
