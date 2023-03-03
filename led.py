@@ -23,12 +23,5 @@ class Led:
             return 0
 
 
-if __name__ == "__main__":
-    led1=Led(17)
-    print(led1.toggle())
-    input()
-    print(led1.toggle())
-    input()
-    print(led1.toggle())
-    input()
+
 
