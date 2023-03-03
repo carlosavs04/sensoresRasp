@@ -12,8 +12,6 @@ class sensor:
         self.nombre=nombre
         if nombre == "":
             self.nombre = self.path
-        if self.path == "led":
-            self.led1=Led(self.pin[0])
     def tipoSensor(self):
         valores=[]
         self.tipo=""
