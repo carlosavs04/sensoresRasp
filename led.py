@@ -1,30 +1,14 @@
 import RPi.GPIO as GPIO
-import time
-import keyboard
 import threading
 
 class Led:
     def __init__(self, pin):
+        self.pin = pin
+        self.estado = False  # Agregamos un atributo para rastrear el estado del LED
         GPIO.setmode(GPIO.BCM)
-        self.led_pin = pin
-        GPIO.setup(self.led_pin, GPIO.OUT)
-        GPIO.output(self.led_pin, GPIO.LOW)
-        self.stop_event = threading.Event()
-
-    def encender(self):
-        GPIO.output(self.led_pin, GPIO.HIGH)
-        return 1
-
-    def apagar(self):
-        GPIO.output(self.led_pin, GPIO.LOW)
-        return 0
+        GPIO.setup(self.pin, GPIO.OUT)
 
     def loop(self):
-        estado = GPIO.input(self.led_pin)
-        ban = 0
-        if estado == GPIO.LOW:
-            ban= self.encender()
-        else:
-            ban = self.apagar()
-        return ban
-
+        self.estado = not self.estado  # Cambiamos el estado del LED en cada llamada al método
+        GPIO.output(self.pin, self.estado)
+        return self.estado  # Devolvemos el estado actual del LED
