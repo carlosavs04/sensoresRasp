@@ -45,6 +45,7 @@ class sensor:
         timestamp = time.time()
         fecha_hora = datetime.datetime.fromtimestamp(timestamp)
         cadena_fecha_hora = fecha_hora.strftime('%H:%M:%S')
+        print(arreglo)
         if self.path == "tmp":
             data=[]
             data0 = {
