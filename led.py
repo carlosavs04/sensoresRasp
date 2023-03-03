@@ -3,20 +3,17 @@ from gpiozero import LED
 
 
 class Led:
-    estado_actual=False
     def __init__(self, pin):
         self.pin = pin
         self.led = LED(self.pin)
 
     def toggle(self):
-        if self.estado_actual:
+        if self.led.is_lit:
             self.led.off()
-            self.estado_actual = False
             return 0
 
         else:
             self.led.on()
-            self.estado_actual = True
             return 1
 
     def estado(self):
@@ -28,16 +25,10 @@ class Led:
 
 if __name__ == "__main__":
     led1=Led(17)
-    led1.led.on()
-    print(led1.estado())
-    led1.led.off()
-    print(led1.estado())
-    led1.led.on()
-    print(led1.estado())
-    led1.led.off()
-    print(led1.estado())
-    led1.led.on()
-    print(led1.estado())
-    led1.led.off()
-    print(led1.estado())
+    print(led1.toggle())
+    input()
+    print(led1.toggle())
+    input()
+    print(led1.toggle())
+    input()
 
