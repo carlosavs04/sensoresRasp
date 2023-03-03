@@ -1,3 +1,5 @@
+import time
+
 from sensores import sensor
 import json
 
@@ -56,6 +58,7 @@ class main:
                             "|{:<3} | {:<20} | {:<25} | {:<4} {:<5} | {:<10} | {:<2} {:<2}|".format(i,data["nombre"], data["tipo"], data["valores"][0],
                                                                       data["valores"][1],
                                                                       data["fecha"], data["pines"][0],data["pines"][1]))
+            time.sleep(1)
     def menu(self):
         print("------------Menu------------")
         print("1. Sensores")

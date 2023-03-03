@@ -32,8 +32,8 @@ class sensor:
 
         elif self.path=="led":
             self.tipo="Led"
-            led1 = Led(self.pin[0])
-            stat = led1.toggle()
+            self.led1 = Led(self.pin[0])
+            stat = self.led1.toggle()
             valores.append(stat)
         return valores
 
@@ -52,3 +52,15 @@ class sensor:
         }
         jsonS=json.dumps(data)
         return jsonS
+
+
+if __name__ == "__main__":
+    led = sensor("led",[17],"Foco")
+    print(led.led1.toggle())
+    input()
+    print(led.led1.toggle())
+    input()
+    print(led.led1.toggle())
+    input()
+    print(led.led1.toggle())
+    input()
