@@ -24,8 +24,9 @@ class sensor:
             self.tipo="Temperatura-Humedad"
             sensor = temperatura(self.pin[0])
             hum, temp = sensor.lectura()
-            valores.append(hum)
-            valores.append(temp)
+            if hum is not None and temp is not None:
+                valores.append(hum)
+                valores.append(temp)
 
         elif self.path=="led":
             self.tipo="Led"
