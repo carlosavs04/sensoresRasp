@@ -32,8 +32,9 @@ class main:
                 data=json.loads(sens.lectura())
                 if len(data["valores"]) == 1:
                     print("{:<20} {:<25} {:<10} {:<10}".format(data["nombre"], data["tipo"],data["valores"][0], data["fecha"], data))
-
-
+                elif len(data["valores"]) == 2:
+                    print("{:<20} {:<25} {:<4} {:<4} {:<10}".format(data["nombre"], data["tipo"], data["valores"][0],data["valores"][1],
+                                                               data["fecha"], data))
     def menu(self):
         print("------------Menu------------")
         print("1. Sensores")
