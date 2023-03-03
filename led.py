@@ -1,5 +1,5 @@
-import RPi.GPIO as GPIO
-import threading
+from gpiozero import LED
+
 
 class Led:
     def __init__(self, pin):
