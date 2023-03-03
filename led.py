@@ -28,4 +28,4 @@ class Led:
 
 if __name__ == "__main__":
     led1=Led(17)
-    led1.estado()
+    print(led1.estado())
