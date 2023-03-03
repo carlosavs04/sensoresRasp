@@ -58,11 +58,11 @@ class sensor:
 
 if __name__ == "__main__":
     led = sensor("led",[17],"Foco")
-    print(led.led1.toggle())
+    print(led.lectura())
     input()
-    print(led.led1.toggle())
+    print(led.lectura())
     input()
-    print(led.led1.toggle())
+    print(led.lectura())
     input()
-    print(led.led1.toggle())
+    print(led.lectura())
     input()
