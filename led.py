@@ -18,4 +18,5 @@ class Led:
         return ban
 if __name__ == "__main__":
     led1=Led(17)
-    print(led1.toggle())
+    while True:
+        print(led1.toggle())
