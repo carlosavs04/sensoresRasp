@@ -29,7 +29,7 @@ class main:
 
             for sens in sensores:
                 # print(sens.lectura())
-                data=json.loads(sens.lectura())
+                data=json.load(sens.lectura())
                 print("{:<20} {:<25} {:<20} {:<20} {:<20} {:<20}".format(data["nombre"], data["tipo"], data["valores"], data["fecha"],data["pines"]))
 
     def menu(self):
