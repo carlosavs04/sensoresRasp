@@ -23,14 +23,14 @@ class main:
         temp = sensor("tmp", [5], "Cocina")
         ult = sensor("ult",[23,24],"Puerta")
         sensores=[temp,ult]
-        print("{:<20} {:<20} {:<20} {:<20}".format("Nombre", "Tipo", "Valores", "Tiempo", "Pines"))
+        print("{:<20} {:<25} {:<20} {:<20} {:<20}".format("Nombre", "Tipo", "Valores", "Tiempo", "Pines"))
 
         while True:
 
             for sens in sensores:
                 # print(sens.lectura())
                 data=json.loads(sens.lectura())
-                print("{:<20} {:<20} {:<20} {:<20} {:<20}".format(data["nombre"], data["tipo"], data["valores"], data["fecha"],data["pines"]))
+                print("{:<20} {:<25} {:<20} {:<20} {:<20} {:<20}".format(data["nombre"], data["tipo"], data["valores"], data["fecha"],data["pines"]))
 
     def menu(self):
         print("------------Menu------------")
