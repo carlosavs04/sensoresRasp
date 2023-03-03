@@ -26,7 +26,7 @@ class main:
         ult = sensor("ult",[23,24],"Puerta")
         led = sensor("led",[17],"Foco")
         sensores=[temp,ult,led]
-        print("{:<20} {:<25} {:<20} {:<20} {:<20}".format("Nombre", "Tipo", "Valores", "Tiempo", "Pines"))
+        print("|{:<3} | {:<20} | {:<25} | {:<10} | {:<10} | {:<5}|".format("#","Nombre", "Tipo", "Valores", "Tiempo", "Pines"))
 
         while True:
             i=0
