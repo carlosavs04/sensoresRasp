@@ -1,4 +1,4 @@
-from gpiozero import LED
+import gpiozero
 
 
 class Led:
