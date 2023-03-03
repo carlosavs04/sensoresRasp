@@ -1,4 +1,4 @@
-
+import time
 import gpiozero
 
 
@@ -7,18 +7,18 @@ class Led:
         self.pin = pin
         self.led = gpiozero.LED(self.pin)
         self.estado = self.led.value
-    def toggle(self, ban):
+    def toggle(self):
+        time.sleep(2)
         if self.estado == 1:
             self.led.on()
         else:
             self.led.off()
-        return ban
+
+
+    def check(self):
+        print(self.led.active_high)
+
 if __name__ == "__main__":
     led1=Led(17)
-    estado = 1
-    while True:
-        print(led1.toggle(estado))
-        if estado == 1:
-            estado=0
-        else:
-            estado = 1
+
+    led1.check()
