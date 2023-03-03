@@ -8,6 +8,7 @@ class UltrasonicSensor:
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(self.trigger_pin, GPIO.OUT)
         GPIO.setup(self.echo_pin, GPIO.IN)
+        GPIO.setwarnings(False)
 
     def medirDistancia(self):
         GPIO.output(self.trigger_pin, GPIO.LOW)

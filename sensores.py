@@ -3,6 +3,7 @@ from temperatura import temperatura
 from led import Led
 import time
 import json
+import datetime
 
 class sensor:
     def __init__(self,path="",pin=[],nombre=""):
@@ -41,11 +42,15 @@ class sensor:
 
     def lectura(self):
         arreglo = self.tipoSensor()
+        timestamp = time.time()
+        fecha_hora = datetime.datetime.fromtimestamp(timestamp)
+        cadena_fecha_hora = fecha_hora.strftime('%H:%M:%S')
+
         data={
             "nombre":self.nombre,
             "tipo":self.tipo,
             "valores":arreglo,
-            "fecha":time.time(),
+            "fecha":cadena_fecha_hora,
             "pines":self.pin
         }
         jsonS=json.dumps(data)
