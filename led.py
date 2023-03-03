@@ -21,9 +21,10 @@ class Led:
 
     def loop(self):
         estado = GPIO.input(self.led_pin)
+        ban = 0
         if estado == GPIO.LOW:
-            self.encender()
+            ban= self.encender()
         else:
-            self.apagar()
-
+            ban = self.apagar()
+        return ban
 
