@@ -7,14 +7,14 @@ class Led:
         self.pin = pin
         self.led = gpiozero.LED(self.pin)
     def toggle(self):
-        time.sleep(2)
         if self.led.active_high:
-            self.led.off()
-            return 0
-        else:
             self.led.on()
             return 1
 
+
+        else:
+            self.led.off()
+            return 0
 
 
 if __name__ == "__main__":
