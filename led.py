@@ -6,6 +6,8 @@ class Led:
     def __init__(self, pin):
         self.pin = pin
         self.led = gpiozero.LED(self.pin)
+        self.led.on()
+
         self.estado = self.led.value
     def toggle(self):
         ban=0
@@ -19,4 +21,4 @@ class Led:
 if __name__ == "__main__":
     led1=Led(17)
     while True:
-        print(led1.toggle())
+        print(led1.toggle(0))
