@@ -9,8 +9,7 @@ class Led:
 
     def toggle(self):
         ban=0
-
-        if self.led.is_active:
+        if gpiozero.LED(self.pin).is_lit:
             self.led.on()
             ban = 1
         else:
