@@ -21,4 +21,4 @@ class Led:
 if __name__ == "__main__":
     led1=Led(17)
     while True:
-        print(led1.toggle(0))
+        print(led1.toggle())
