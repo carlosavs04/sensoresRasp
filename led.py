@@ -9,9 +9,11 @@ class Led:
 
     def toggle(self):
         ban=0
-        self.led.toggle()
+
         if self.led.is_active:
+            self.led.on()
             ban = 1
         else:
+            self.led.off()
             ban = 0
         return ban
