@@ -28,4 +28,16 @@ class Led:
 
 if __name__ == "__main__":
     led1=Led(17)
+    led1.led.on()
     print(led1.estado())
+    led1.led.off()
+    print(led1.estado())
+    led1.led.on()
+    print(led1.estado())
+    led1.led.off()
+    print(led1.estado())
+    led1.led.on()
+    print(led1.estado())
+    led1.led.off()
+    print(led1.estado())
+
