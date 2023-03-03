@@ -18,4 +18,4 @@ class Led:
         return ban
 if __name__ == "__main__":
     led1=Led(17)
-    print(led1.estado())
+    print(str(led1.estado()))
