@@ -33,12 +33,8 @@ class sensor:
         elif self.path=="led":
             self.tipo="Led"
             led1 = Led(self.pin[0])
-            if self.bandera==1:
-                led1.apagar()
-                self.bandera=0
-            else:
-                led1.encender()
-                self.bandera = 1
+            stat = led1.loop()
+            valores.append(stat)
         return valores
 
     def lectura(self):

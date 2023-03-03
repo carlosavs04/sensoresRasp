@@ -19,18 +19,11 @@ class Led:
         GPIO.output(self.led_pin, GPIO.LOW)
         return 0
 
-    def led_loop(self):
-        while not self.stop_event.is_set():
-
-            time.sleep(5)
-
-
-        GPIO.output(self.led_pin, GPIO.LOW)
-        self.thread = None
-
-    def detener(self):
-        self.stop_event.set()
-        self.thread.join()
-        GPIO.cleanup()
+    def loop(self):
+        estado = GPIO.input(self.led_pin)
+        if estado == GPIO.LOW:
+            self.encender()
+        else:
+            self.apagar()
 
 

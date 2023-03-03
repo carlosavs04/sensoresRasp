@@ -22,7 +22,8 @@ class main:
 
         temp = sensor("tmp", [5], "Cocina")
         ult = sensor("ult",[23,24],"Puerta")
-        sensores=[temp,ult]
+        led = sensor("led"[17],"Foco")
+        sensores=[temp,ult,led]
         print("{:<20} {:<25} {:<20} {:<20} {:<20}".format("Nombre", "Tipo", "Valores", "Tiempo", "Pines"))
 
         while True:
