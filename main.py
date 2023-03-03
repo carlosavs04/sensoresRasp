@@ -34,8 +34,9 @@ class main:
                 i=i+1
                 # print(sens.lectura())
                 data=json.loads(sens.lectura())
-                for i in data:
-                    print(i)
+                print(data)
+                # for i in data:
+                #     print(i)
                     # if len(data["pines"]) == 1:
                     #     print("|{:<3} | {:<20} | {:<25} | {:<8}{:<2} | {:<10} | {:<5}|".format(i,data["nombre"], data["tipo"],
                     #                                                                     data["valores"],
