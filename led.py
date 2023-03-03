@@ -20,6 +20,7 @@ class Led:
 
 if __name__ == "__main__":
     led1=Led(17)
-    led1.led.on()
-    led1.check()
-    input()
+    while True:
+        led1.led.on()
+        led1.check()
+        input()
