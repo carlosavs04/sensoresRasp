@@ -30,7 +30,7 @@ class sensor:
             self.tipo="Temperatura"
             sensor = temperatura(self.pin[0])
             hum, temp = sensor.lectura()
-            if hum is not None:
+            if hum is not None and temp is not None:
                 valores.append(hum)
                 valores.append(temp)
 
@@ -48,24 +48,25 @@ class sensor:
         print(arreglo)
         data=[]
         if self.path == "tmp" and len(arreglo) < 0:
-            data0 = {
-                "nombre": self.nombre,
-                "tipo": self.tipo,
-                "valores": arreglo[0],
-                "dato":"°C",
-                "fecha": cadena_fecha_hora,
-                "pines": self.pin
-            }
-            data.append(data0)
-            data1={
-                "nombre":self.nombre,
-                "tipo":"hum",
-                "valores":arreglo[1],
-                "dato":"hum",
-                "fecha":cadena_fecha_hora,
-                "pines":self.pin
-            }
-            data.append(data1)
+            if arreglo[0] is not None:
+                data0 = {
+                    "nombre": self.nombre,
+                    "tipo": self.tipo,
+                    "valores": arreglo[0],
+                    "dato":"°C",
+                    "fecha": cadena_fecha_hora,
+                    "pines": self.pin
+                }
+                data.append(data0)
+                data1={
+                    "nombre":self.nombre,
+                    "tipo":"hum",
+                    "valores":arreglo[1],
+                    "dato":"hum",
+                    "fecha":cadena_fecha_hora,
+                    "pines":self.pin
+                }
+                data.append(data1)
         else:
             data1 = {
                 "nombre": self.nombre,
