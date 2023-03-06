@@ -43,7 +43,7 @@ class main:
                             # print(i["dato"])
                             # print(i["fecha"])
                             # print(i["pines"][0])
-                            print("|{:<3} | {:<20} | {:<25} | {:<6}{:<4} | {:<10} | {:<5}|".format(x, i["nombre"],
+                            print("|{:<3} | {:<20} | {:<25} | {:<7}{:<4} | {:<10} | {:<5}|".format(x, i["nombre"],
                                                                                                i["tipo"],
                                                                                                i["valores"],
                                                                                                i["dato"],
@@ -57,7 +57,7 @@ class main:
                             # print(i["fecha"])
                             # print(i["pines"][0])
                             # print(i["pines"][1])
-                            print("|{:<3} | {:<20} | {:<25} | {:<6}{:<4} | {:<10} | {:<2} {:<2}|".format(x,i["nombre"],
+                            print("|{:<3} | {:<20} | {:<25} | {:<7}{:<4} | {:<10} | {:<2} {:<2}|".format(x,i["nombre"],
                                                                                                 i["tipo"],
                                                                                                 i["valores"],
                                                                                                 i["dato"],
