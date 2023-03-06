@@ -41,23 +41,23 @@ class main:
                         # print(i["valores"])
                         # print(i["dato"])
                         # print(i["fecha"])
-                        # print(i["pines"])
-                        if len(i["pines"]) == 1:
-                            print("|{:<3} | {:<20} | {:<25} | {:<6}{:<4} | {:<10} | {:<5}|".format(x,i["nombre"],
-                                                                                                i["tipo"],
-                                                                                                i["valores"],
-                                                                                                i["dato"],
-                                                                                                i["fecha"],
-                                                                                                i["pines"]))
-                        elif len(i["pines"]) == 2:
-                            print(
-                                "|{:<3} | {:<20} | {:<25} | {:<6}{:<4} | {:<10} | {:<2} {:<2}|".format(x,i["nombre"],
-                                                                                                i["tipo"],
-                                                                                                i["valores"],
-                                                                                                i["dato"],
-                                                                                                i["fecha"],
-                                                                                                i["pines"][0],
-                                                                                                i["pines"][1]))
+                        # # print(i["pines"])
+                        # if len(i["pines"]) == 1:
+                        print("|{:<3} | {:<20} | {:<25} | {:<6}{:<4} | {:<10} | {:<5}|".format(x,i["nombre"],
+                                                                                            i["tipo"],
+                                                                                            i["valores"],
+                                                                                            i["dato"],
+                                                                                            i["fecha"],
+                                                                                            i["pines"]))
+                        # elif len(i["pines"]) == 2:
+                        #     print(
+                        #         "|{:<3} | {:<20} | {:<25} | {:<6}{:<4} | {:<10} | {:<2} {:<2}|".format(x,i["nombre"],
+                        #                                                                         i["tipo"],
+                        #                                                                         i["valores"],
+                        #                                                                         i["dato"],
+                        #                                                                         i["fecha"],
+                        #                                                                         i["pines"][0],
+                        #                                                                         i["pines"][1]))
 
     def menu(self):
         print("------------Menu------------")
