@@ -29,31 +29,28 @@ class main:
         print("|{:<3} | {:<20} | {:<25} | {:<10} | {:<10} | {:<5}|".format("#","Nombre", "Tipo", "Valores", "Tiempo", "Pines"))
 
         while True:
-            i=0
+            x=0
             for sens in sensores:
-                i=i+1
+                x=x+1
                 # print(sens.lectura())
                 data=json.loads(sens.lectura())
                 if len(data)>=1:
-                 print(data)
-                # for i in data:
-                #     print(i)
-                    # if len(data["pines"]) == 1:
-                    #     print("|{:<3} | {:<20} | {:<25} | {:<8}{:<2} | {:<10} | {:<5}|".format(i,data["nombre"], data["tipo"],
-                    #                                                                     data["valores"],
-                    #                                                                     data["dato"],
-                    #                                                                     data["fecha"],
-                    #                                                                     data["pines"][0]))
-                    # elif len(data["pines"]) == 2:
-                    #     print(
-                    #         "|{:<3} | {:<20} | {:<25} | {:<8}{:<2} | {:<10} | {:<2} {:<2}|".format(i,data["nombre"],
-                    #                                                                         data["tipo"],
-                    #                                                                         data["valores"],
-                    #                                                                            data["dato"],
-                    #
-                    #                                                                            data["fecha"],
-                    #                                                                         data["pines"][0],
-                    #                                                                         data["pines"][1]))
+                    for i in data:
+                        if len(data["pines"]) == 1:
+                            print("|{:<3} | {:<20} | {:<25} | {:<8}{:<2} | {:<10} | {:<5}|".format(x,i["nombre"], i["tipo"],
+                                                                                            i["valores"],
+                                                                                            i["dato"],
+                                                                                            i["fecha"],
+                                                                                            i["pines"][0]))
+                        elif len(data["pines"]) == 2:
+                            print(
+                                "|{:<3} | {:<20} | {:<25} | {:<8}{:<2} | {:<10} | {:<2} {:<2}|".format(x,i["nombre"],
+                                                                                                i["tipo"],
+                                                                                                i["valores"],
+                                                                                                i["dato"],
+                                                                                                i["fecha"],
+                                                                                                i["pines"][0],
+                                                                                                i["pines"][1]))
 
     def menu(self):
         print("------------Menu------------")
