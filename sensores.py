@@ -14,20 +14,20 @@ class sensor:
             self.nombre = self.path
         if self.path == "led":
             self.led1 = Led(self.pin[0])
-        self.tipoDato = ""
+        self.tipoDato = [""]
     def tipoSensor(self):
         valores=[]
         self.tipo=""
 
         if self.path == "ult":
-            self.tipo="Ultrasonico"
+            self.tipo=["Ultrasonico"]
             sensorUlt = UltrasonicSensor(trigger_pin=self.pin[0], echo_pin=self.pin[1])
             distancia = sensorUlt.medirDistancia()
             valores.append(distancia)
-            self.tipoDato="Cm"
-
+            self.tipoDato=["Cm"]
         elif self.path=="tmp":
-            self.tipo="Temperatura"
+            self.tipo=["Temperatura","Humedad"]
+            self.tipoDato=["°C"," h"]
             sensor = temperatura(self.pin[0])
             hum, temp = sensor.lectura()
             if hum is not None and temp is not None:
@@ -35,7 +35,7 @@ class sensor:
                 valores.append(temp)
 
         elif self.path=="led":
-            self.tipo="Led"
+            self.tipo=["Led"]
             stat = self.led1.toggle()
             valores.append(stat)
         return valores
@@ -47,17 +47,38 @@ class sensor:
         cadena_fecha_hora = fecha_hora.strftime('%H:%M:%S')
         print(arreglo)
         data=[]
-        data1 = {
-            "nombre": self.nombre,
-            "tipo": self.tipo,
-            "valores": arreglo,
-            "dato":self.tipoDato,
-            "fecha": cadena_fecha_hora,
-            "pines": self.pin
-        }
-        data.append(data1)
+        if len(self.tipo)>1:
+            data1 = {
+                "nombre": self.nombre,
+                "tipo": self.tipo,
+                "valores": arreglo[0],
+                "dato": self.tipoDato[0],
+                "fecha": cadena_fecha_hora[0],
+                "pines": self.pin
+            }
+            data2 = {
+                "nombre": self.nombre,
+                "tipo": self.tipo[1],
+                "valores": arreglo[1],
+                "dato": self.tipoDato[1],
+                "fecha": cadena_fecha_hora,
+                "pines": self.pin
+            }
+            data.append(data1)
+            data.append(data2)
+        else:
+            data1 = {
+                "nombre": self.nombre,
+                "tipo": self.tipo[0],
+                "valores": arreglo[0],
+                "dato":self.tipoDato[0],
+                "fecha": cadena_fecha_hora,
+                "pines": self.pin
+            }
+            data.append(data1)
         jsonS = json.dumps(data)
-        return jsonS
+        if data>0:
+            return jsonS
 
 
 if __name__ == "__main__":
