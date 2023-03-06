@@ -50,8 +50,8 @@ class sensor:
             data1 = {
                 "nombre": self.nombre,
                 "tipo": self.tipo[0],
-                "valores": arreglo,
-                "dato": self.tipoDato,
+                "valores": arreglo[0],
+                "dato": self.tipoDato[0],
                 "fecha": cadena_fecha_hora,
                 "pines": self.pin
             }
@@ -59,8 +59,8 @@ class sensor:
             data2 = {
                 "nombre": self.nombre,
                 "tipo": self.tipo[1],
-                "valores": arreglo,
-                "dato": self.tipoDato,
+                "valores": arreglo[1],
+                "dato": self.tipoDato[1],
                 "fecha": cadena_fecha_hora,
                 "pines": self.pin
             }
