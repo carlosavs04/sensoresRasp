@@ -38,9 +38,9 @@ class sensor:
             self.tipo=["Led"]
             stat = self.led1.toggle()
             if stat == 1:
-                self.tipoDato= "On"
+                self.tipoDato= ["On"]
             else:
-                self.tipoDato="Off"
+                self.tipoDato=["Off"]
             valores.append(stat)
         return valores
 
