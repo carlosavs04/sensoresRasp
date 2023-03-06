@@ -23,10 +23,10 @@ class main:
         # led1 = Led(17)
 
         temp = sensor("tmp", [5], "Cocina")
-        # ult = sensor("ult",[23,24],"Puerta")
-        # led = sensor("led",[17],"Foco")
-        # sensores=[temp,ult,led]
-        sensores=[temp]
+        ult = sensor("ult",[23,24],"Puerta")
+        led = sensor("led",[17],"Foco")
+        sensores=[temp,ult,led]
+        # sensores=[temp]
 
         print("|{:<3} | {:<20} | {:<25} | {:<11} | {:<10} | {:<5}|".format("#","Nombre", "Tipo", "Valores", "Tiempo", "Pines"))
 
