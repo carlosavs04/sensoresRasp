@@ -46,6 +46,7 @@ class sensor:
         fecha_hora = datetime.datetime.fromtimestamp(timestamp)
         cadena_fecha_hora = fecha_hora.strftime('%H:%M:%S')
         data=[]
+        print(arreglo)
         if arreglo is not None:
             if len(self.tipo)==2:
                 data1 = {
