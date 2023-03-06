@@ -36,13 +36,13 @@ class main:
                 data=json.loads(sens.lectura())
                 if len(data)>=1:
                     for i in data:
-                        if len(data["pines"]) == 1:
+                        if len(i["pines"]) == 1:
                             print("|{:<3} | {:<20} | {:<25} | {:<8}{:<2} | {:<10} | {:<5}|".format(x,i["nombre"], i["tipo"],
                                                                                             i["valores"],
                                                                                             i["dato"],
                                                                                             i["fecha"],
                                                                                             i["pines"][0]))
-                        elif len(data["pines"]) == 2:
+                        elif len(i["pines"]) == 2:
                             print(
                                 "|{:<3} | {:<20} | {:<25} | {:<8}{:<2} | {:<10} | {:<2} {:<2}|".format(x,i["nombre"],
                                                                                                 i["tipo"],
