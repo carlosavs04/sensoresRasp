@@ -69,9 +69,9 @@ class sensor:
         else:
             data1 = {
                 "nombre": self.nombre,
-                "tipo": self.tipo,
-                "valores": arreglo,
-                "dato":self.tipoDato,
+                "tipo": self.tipo[0],
+                "valores": arreglo[0],
+                "dato":self.tipoDato[0],
                 "fecha": cadena_fecha_hora,
                 "pines": self.pin
             }
