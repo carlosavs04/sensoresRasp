@@ -46,11 +46,12 @@ class sensor:
         fecha_hora = datetime.datetime.fromtimestamp(timestamp)
         cadena_fecha_hora = fecha_hora.strftime('%H:%M:%S')
         data=[]
+        print(arreglo)
         if self.path == "tmp":
             data1 = {
                 "nombre": self.nombre,
                 "tipo": self.tipo[0],
-                "valores": arreglo[0],
+                "valores": arreglo,
                 "dato": self.tipoDato[0],
                 "fecha": cadena_fecha_hora,
                 "pines": self.pin
@@ -59,7 +60,7 @@ class sensor:
             data2 = {
                 "nombre": self.nombre,
                 "tipo": self.tipo[1],
-                "valores": arreglo[1],
+                "valores": arreglo,
                 "dato": self.tipoDato[1],
                 "fecha": cadena_fecha_hora,
                 "pines": self.pin
