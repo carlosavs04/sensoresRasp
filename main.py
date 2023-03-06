@@ -36,14 +36,13 @@ class main:
                 data=json.loads(sens.lectura())
                 if len(data)>=1:
                     for i in data:
-                        print(i["nombre"])
-                        print(i["tipo"])
-                        print(i["valores"])
-                        print(i["dato"])
-                        print(i["fecha"])
-                        print(i["pines"])
                         if len(i["pines"]) == 1:
-                            print("Un pin")
+                            print(i["nombre"])
+                            print(i["tipo"])
+                            print(i["valores"])
+                            print(i["dato"])
+                            print(i["fecha"])
+                            print(i["pines"][0])
                         # print("|{:<3} | {:<20} | {:<25} | {:<6}{:<4} | {:<10} | {:<5}|".format(x,
                         #                                                                     i["nombre"],
                         #                                                                     i["tipo"],
@@ -59,7 +58,14 @@ class main:
                         #                                                                        i["fecha"],
                         #                                                                        i["pines"]))
                         elif len(i["pines"]) == 2:
-                            print("Dos pines")
+                            print(i["nombre"])
+                            print(i["tipo"])
+                            print(i["valores"])
+                            print(i["dato"])
+                            print(i["fecha"])
+                            print(i["pines"][0])
+                            print(i["pines"][1])
+
                         #     print(
                         #         "|{:<3} | {:<20} | {:<25} | {:<6}{:<4} | {:<10} | {:<2} {:<2}|".format(x,i["nombre"],
                         #                                                                         i["tipo"],
