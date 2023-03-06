@@ -41,8 +41,9 @@ class main:
                         print(i["valores"])
                         print(i["dato"])
                         print(i["fecha"])
-                        # print(i["pines"])
-                        # if len(i["pines"]) == 1:
+                        print(i["pines"])
+                        if len(i["pines"]) == 1:
+                            print("Un pin")
                         # print("|{:<3} | {:<20} | {:<25} | {:<6}{:<4} | {:<10} | {:<5}|".format(x,
                         #                                                                     i["nombre"],
                         #                                                                     i["tipo"],
@@ -57,7 +58,8 @@ class main:
                         #                                                                        i["dato"],
                         #                                                                        i["fecha"],
                         #                                                                        i["pines"]))
-                        # elif len(i["pines"]) == 2:
+                         elif len(i["pines"]) == 2:
+                             print("Dos pines")
                         #     print(
                         #         "|{:<3} | {:<20} | {:<25} | {:<6}{:<4} | {:<10} | {:<2} {:<2}|".format(x,i["nombre"],
                         #                                                                         i["tipo"],
