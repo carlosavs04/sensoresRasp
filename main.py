@@ -37,6 +37,12 @@ class main:
                 if len(data)>=1:
                     for i in data:
                         # if len(i["pines"]) == 1:
+                        print(i["nombre"])
+                        print(i["tipo"])
+                        print(i["valores"])
+                        print(i["dato"])
+                        print(i["fecha"])
+                        print(i["pines"])
                         print("|{:<3} | {:<20} | {:<25} | {:<8}{:<4} | {:<10} | {:<5}|".format(x,i["nombre"],
                                                                                                 i["tipo"],
                                                                                                 i["valores"],
