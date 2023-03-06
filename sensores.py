@@ -47,7 +47,7 @@ class sensor:
         cadena_fecha_hora = fecha_hora.strftime('%H:%M:%S')
         data=[]
         if arreglo is not None:
-            if len(self.tipo)>1:
+            if len(self.tipo)==2:
                 data1 = {
                     "nombre": self.nombre,
                     "tipo": self.tipo,
