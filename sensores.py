@@ -75,7 +75,7 @@ class sensor:
                 "fecha": cadena_fecha_hora,
                 "pines": self.pin
             }
-        data.append(data1)
+            data.append(data1)
         jsonS = json.dumps(data)
         return jsonS
 
