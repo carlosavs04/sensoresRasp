@@ -34,7 +34,8 @@ class main:
                 i=i+1
                 # print(sens.lectura())
                 data=json.loads(sens.lectura())
-                print(data)
+                if len(data)>=1:
+                 print(data)
                 # for i in data:
                 #     print(i)
                     # if len(data["pines"]) == 1:

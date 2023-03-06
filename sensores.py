@@ -77,8 +77,7 @@ class sensor:
             }
             data.append(data1)
         jsonS = json.dumps(data)
-        if len(data)>=1:
-            return jsonS
+        return jsonS
 
 
 if __name__ == "__main__":
