@@ -46,8 +46,8 @@ class sensor:
         fecha_hora = datetime.datetime.fromtimestamp(timestamp)
         cadena_fecha_hora = fecha_hora.strftime('%H:%M:%S')
         print(arreglo)
-        if self.path == "tmp" and len(arreglo) < 1:
-            data=[]
+        data=[]
+        if self.path == "tmp" and len(arreglo) < 0:
             data0 = {
                 "nombre": self.nombre,
                 "tipo": self.tipo,
@@ -66,10 +66,8 @@ class sensor:
                 "pines":self.pin
             }
             data.append(data1)
-            jsonS = json.dumps(data)
-
         else:
-            data = {
+            data1 = {
                 "nombre": self.nombre,
                 "tipo": self.tipo,
                 "valores": arreglo,
@@ -77,7 +75,8 @@ class sensor:
                 "fecha": cadena_fecha_hora,
                 "pines": self.pin
             }
-            jsonS = json.dumps(data)
+            data.append(data1)
+        jsonS = json.dumps(data)
         return jsonS
 
 
