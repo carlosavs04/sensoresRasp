@@ -138,6 +138,7 @@ class main:
                 #     break
                 i = self.juntos()
                 sensor = Sensores(i["nombre"],i["tipo"],i["valores"],i["dato"],i["fecha"],i["hora"],i["pines"])
+                print(sensor.to_dict())
                 self.sensores.agregar(sensor.to_dict())
 
 
