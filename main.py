@@ -125,7 +125,7 @@ class main:
         if self.bandera2 == 1:  # si esta en conexion
             self.timer_count += 1  # incrementa el contador de tiempo
             if self.timer_count >= self.tiempoEspera / 60:  # verifica si han pasado 15 minutos
-                self.sensores.borrarInfo("Sensores.json")
+                # self.sensores.borrarInfo("Sensores.json")
                 print("Se borro historial local")
                 self.timer_count = 0  # resetea el contador de tiempo
         else:
