@@ -69,7 +69,7 @@ class sensor:
                     "fecha":cadena_fecha,
                     "hora": cadena_fecha_hora,
                     "pines": self.pin,
-                     "_id": str(self._id)
+                     # "_id": str(self._id)
 
                 }
                 data.append(data1)
@@ -82,7 +82,7 @@ class sensor:
                     "fecha": cadena_fecha,
                     "hora": cadena_fecha_hora,
                     "pines": self.pin,
-                    "_id": str(self._id)
+                    # "_id": str(self._id)
 
                 }
                 data.append(data2)
@@ -96,7 +96,7 @@ class sensor:
                 "fecha": cadena_fecha,
                 "hora": cadena_fecha_hora,
                 "pines": self.pin,
-                "_id": str(self._id)
+                # "_id": str(self._id)
 
             }
             data.append(data1)
