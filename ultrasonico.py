@@ -12,36 +12,19 @@ class UltrasonicSensor:
 
     def medirDistancia(self):
         GPIO.setwarnings(False)
-        num_intentos = 3
-        intento_actual = 0
 
-        while intento_actual < num_intentos:
-            intento_actual += 1
-
-            GPIO.output(self.trigger_pin, GPIO.LOW)
-            time.sleep(0.2)
-            GPIO.output(self.trigger_pin, GPIO.HIGH)
-            time.sleep(0.00001)
-            GPIO.output(self.trigger_pin, GPIO.LOW)
-
-            start_time = 0
-            end_time = 0
-
-            while GPIO.input(self.echo_pin) == GPIO.LOW:
-                start_time = time.time()
-            while GPIO.input(self.echo_pin) == GPIO.HIGH:
-                end_time = time.time()
-
-            if start_time == 0 or end_time == 0:
-                continue
-
-            pulse_duration = end_time - start_time
-            distance = pulse_duration * 17150
-
-            if distance > 0:
-                return round(distance, 2)
-
-        return "fallo"
+        GPIO.output(self.trigger_pin, GPIO.LOW)
+        time.sleep(0.2)
+        GPIO.output(self.trigger_pin, GPIO.HIGH)
+        time.sleep(0.00001)
+        GPIO.output(self.trigger_pin, GPIO.LOW)
+        while GPIO.input(self.echo_pin) == GPIO.LOW:
+            start_time = time.time()
+        while GPIO.input(self.echo_pin) == GPIO.HIGH:
+            end_time = time.time()
+        pulse_duration = end_time - start_time
+        distance = pulse_duration * 17150
+        return round(distance, 2)
 
     def liberarPin(self):
         GPIO.cleanup()
