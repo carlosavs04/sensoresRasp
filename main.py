@@ -29,8 +29,8 @@ class main:
                 self.lectura2()
             if opcion == "2":
                 interBD().mainBd()
-            elif opcion == "7":
-                self.juntos()
+            # elif opcion == "7":
+            #     self.juntos()
             elif opcion == "5":
                 # Salir
                 print("Saliendo del sistema...")
@@ -94,8 +94,7 @@ class main:
         ult = sensor("ult", [23, 24], "Puerta")
         led = sensor("led", [17], "Foco")
         sensores = [temp, led, ult]
-        self.sensoresLectura(sensores)
-        i = self.juntos()
+        i = self.sensoresLectura(sensores)
 
         if self.bandera2 == 1:  # si esta en conexion
             lista = self.sensores.mostrar()
