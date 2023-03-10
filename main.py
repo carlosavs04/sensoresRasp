@@ -39,11 +39,12 @@ class main:
                 print("Opción inválida, intente de nuevo.")
                 input("Presione Enter para continuar...")
 
-    def juntos(self):
-        temp = sensor("tmp", [5], "Cocina")
-        ult = sensor("ult",[23,24],"Puerta")
-        led = sensor("led",[17],"Foco")
-        sensores=[temp,led, ult]
+    def sensoresLectura(self, arreglo):
+        # temp = sensor("tmp", [5], "Cocina")
+        # ult = sensor("ult",[23,24],"Puerta")
+        # led = sensor("led",[17],"Foco")
+        # sensores=[temp,led, ult]
+        sensores=arreglo
         # sensores=[temp]
         x=0
         for sens in sensores:
@@ -89,23 +90,24 @@ class main:
     #                     Logica para insertar en docs:
 
     def lectura2(self):
-        print("--------Lectura de sensores--------")
+        temp = sensor("tmp", [5], "Cocina")
+        ult = sensor("ult", [23, 24], "Puerta")
+        led = sensor("led", [17], "Foco")
+        sensores = [temp, led, ult]
+        self.sensoresLectura(sensores)
+        i = self.juntos()
+
         if self.bandera2 == 1:  # si esta en conexion
-            print("--------Conexion--------")
             lista = self.sensores.mostrar()
             if len(lista) >= 1:  # si la lista de sensores tiene objetos, debe ingresarlos a la bd antes de los otros
-                print("Subiendo datos no encontrados en la bd")
-                for i in lista:
-                    if self.obj.find_one(self.colecion, i):
+                for x in lista:
+                    if self.obj.find_one(self.colecion, x):
                         pass
                     else:
-                        self.obj.insert_one(self.colecion, i)
+                        self.obj.insert_one(self.colecion, x)
                 self.sensores.borrarInfo("Sensores.json")
             self.hiloBorrarPTiempo()
-            print(f"Guardando en {self.obj.bd} - {self.colecion}..")
-            print(
-                "|{:<3} | {:<20} | {:<25} | {:<11} | {:<10} | {:<10} | {:<5}|".format("#", "Nombre", "Tipo", "Valores",
-                                                                                      "Fecha", "Hora", "Pines"))
+
             while True:  # tiempo en segundos
                 # aux = self.sensores.mostrar()
                 # if len(aux) >= 1:
@@ -115,7 +117,6 @@ class main:
                 #     else:
                 #         self.obj.insert_one(self.colecion, aux[ubi])
 
-                i = self.juntos()
                 self.sensores.agregar(i)
 
                 if self.obj.insert_one(self.colecion,i) is False:  # si no se inserto, debe cambiar la bandera
@@ -136,7 +137,6 @@ class main:
                 # user_input = input()
                 # if user_input == " ":
                 #     break
-                i = self.juntos()
                 self.sensores.agregar(i)
 
 
