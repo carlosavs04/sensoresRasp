@@ -65,11 +65,11 @@ class sensor:
                 sensor1=Sensores(self.path,self.nombre,self.tipo[0],arreglo[0],self.tipoDato[0],cadena_fecha,cadena_fecha_hora,self.pin,)
                 data.append(sensor1.to_dict())
                 sensor2=Sensores(self.path,self.nombre,self.tipo[1],arreglo[1],self.tipoDato[1],cadena_fecha,cadena_fecha_hora,self.pin,)
-                data.append(sensor2)
+                data.append(sensor2.to_dict())
 
         else:
             sensor1 = Sensores(self.path, self.nombre, self.tipo[0], arreglo[0], self.tipoDato[0], cadena_fecha, cadena_fecha_hora, self.pin, )
-            data.append(sensor1)
+            data.append(sensor1.to_dict())
         jsonS = json.dumps(data)
         return jsonS
 
