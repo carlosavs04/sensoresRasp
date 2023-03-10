@@ -5,11 +5,13 @@ import time
 import json
 import datetime
 from bson import ObjectId
+from ultimaLectura import Sensores
 class sensor:
     def __init__(self,path="",pin=[],nombre=""):
         self.path=path
         self.pin=pin
         self.nombre=nombre
+        self.sens=Sensores()
         if nombre == "":
             self.nombre = self.path
         if self.path == "led":
@@ -60,46 +62,13 @@ class sensor:
             self._id=ObjectId
         if self.path == "tmp":
             if len(arreglo) > 1:
-                data1 = {
-                    "clave": self.path,
-                    "nombre": self.nombre,
-                    "tipo": self.tipo[0],
-                    "valores": arreglo[0],
-                    "dato": self.tipoDato[0],
-                    "fecha":cadena_fecha,
-                    "hora": cadena_fecha_hora,
-                    "pines": self.pin,
-                     # "_id": str(self._id)
-
-                }
-                data.append(data1)
-                data2 = {
-                    "clave": self.path,
-                    "nombre": self.nombre,
-                    "tipo": self.tipo[1],
-                    "valores": arreglo[1],
-                    "dato": self.tipoDato[1],
-                    "fecha": cadena_fecha,
-                    "hora": cadena_fecha_hora,
-                    "pines": self.pin,
-                    # "_id": str(self._id)
-
-                }
-                data.append(data2)
+                sensor1=Sensores(self.path,self.nombre,self.tipo[0],arreglo[0],self.tipoDato[0],cadena_fecha,cadena_fecha_hora,self.pin,)
+                data.append(sensor1.to_dict())
+                sensor2=Sensores(self.path,self.nombre,self.tipo[1],arreglo[1],self.tipoDato[1],cadena_fecha,cadena_fecha_hora,self.pin,)
+                data.append(sensor2)
         else:
-            data1 = {
-                "clave": self.path,
-                "nombre": self.nombre,
-                "tipo": self.tipo[0],
-                "valores": arreglo[0],
-                "dato":self.tipoDato[0],
-                "fecha": cadena_fecha,
-                "hora": cadena_fecha_hora,
-                "pines": self.pin,
-                # "_id": str(self._id)
-
-            }
-            data.append(data1)
+            sensor1 = Sensores(self.path, self.nombre, self.tipo[0], arreglo[0], self.tipoDato[0], cadena_fecha, cadena_fecha_hora, self.pin, )
+            data.append(sensor1)
         jsonS = json.dumps(data)
         return jsonS
 
