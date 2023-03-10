@@ -137,9 +137,10 @@ class main:
                 # if user_input == " ":
                 #     break
                 i = self.juntos()
-                sensor = Sensores(i["nombre"],i["tipo"],i["valores"],i["dato"],i["fecha"],i["hora"],i["pines"])
+                sensor = Sensores(i["clave"],i["nombre"],i["tipo"],i["valores"],i["dato"],i["fecha"],i["hora"],i["pines"])
                 print(sensor.to_dict())
-                self.sensores.agregar(sensor.to_dict())
+                print(i)
+                self.sensores.agregar(i)
 
 
     def menu(self):

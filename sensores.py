@@ -54,6 +54,7 @@ class sensor:
         if self.path == "tmp":
             if len(arreglo) > 1:
                 data1 = {
+                    "clave": self.path,
                     "nombre": self.nombre,
                     "tipo": self.tipo[0],
                     "valores": arreglo[0],
@@ -64,6 +65,7 @@ class sensor:
                 }
                 data.append(data1)
                 data2 = {
+                    "clave": self.path,
                     "nombre": self.nombre,
                     "tipo": self.tipo[1],
                     "valores": arreglo[1],
@@ -75,6 +77,7 @@ class sensor:
                 data.append(data2)
         else:
             data1 = {
+                "clave": self.path,
                 "nombre": self.nombre,
                 "tipo": self.tipo[0],
                 "valores": arreglo[0],
