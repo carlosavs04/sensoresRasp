@@ -4,7 +4,7 @@ from Mongo import Mongo
 from sensores import sensor
 import json
 from ultimaLectura import ultimaLectura
-
+import threading
 class main:
     def __init__(self):
         self.ultLectura = ultimaLectura
@@ -117,6 +117,20 @@ class main:
         print("|{:<25} {:<5}|".format("Sensor", "Valor"))
         for sens in sensores:
             print("|{:<25} {:<5}|".format(sens.nombre, sens.valor))
+
+    def hiloBorrarPTiempo(self):
+        timer = threading.Timer(self.tiempoEspera, self.hiloBorrarPTiempo)
+        timer.start()
+
+        if self.bandera2 == 1:  # si esta en conexion
+            self.timer_count += 1  # incrementa el contador de tiempo
+            if self.timer_count >= self.tiempoEspera / 60:  # verifica si han pasado 15 minutos
+                self.sensores.borrarInfo("Sensores.json")
+                print("Se borro historial local")
+                self.timer_count = 0  # resetea el contador de tiempo
+        else:
+            print("Se reinicio el contador")
+            self.timer_count = 0
 
 if __name__ == "__main__":
     main().main()
