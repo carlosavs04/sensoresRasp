@@ -35,7 +35,7 @@ class Sensores(Lista):
         else:
             if self.nombre=="":
                 self.nombre=self.clave
-            diccionario = {"clave":self.clave, "nombre": self.nombre, "tipo":self.tipo , "valores":self.valores, "dato": self.dato,"fecha":self.fecha,"hora":self.hora,"pines":self.pines}
+            diccionario = {'_id': str(self._id),"clave":self.clave, "nombre": self.nombre, "tipo":self.tipo , "valores":self.valores, "dato": self.dato,"fecha":self.fecha,"hora":self.hora,"pines":self.pines}
             listaDicc.append(diccionario)
             return diccionario
 

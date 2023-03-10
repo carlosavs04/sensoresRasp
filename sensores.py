@@ -66,11 +66,12 @@ class sensor:
                 data.append(sensor1.to_dict())
                 sensor2=Sensores(self.path,self.nombre,self.tipo[1],arreglo[1],self.tipoDato[1],cadena_fecha,cadena_fecha_hora,self.pin,)
                 data.append(sensor2)
+
         else:
             sensor1 = Sensores(self.path, self.nombre, self.tipo[0], arreglo[0], self.tipoDato[0], cadena_fecha, cadena_fecha_hora, self.pin, )
             data.append(sensor1)
         jsonS = json.dumps(data)
-        return jsonS
+        return jsonS , [sensor1]
 
 
 if __name__ == "__main__":
