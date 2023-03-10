@@ -3,11 +3,11 @@ from interBD import interBD
 from Mongo import Mongo
 from sensores import sensor
 import json
-from ultimaLectura import ultimaLectura
+from ultimaLectura import Sensores
 import threading
 class main:
     def __init__(self):
-        self.ultLectura = ultimaLectura
+        self.sensores = Sensores()
         self.bandera = 0
         self.dispositivo = ""
         self.mongo = Mongo()
@@ -15,6 +15,7 @@ class main:
         self.tiempoEspera = 60  # tiempo en segundos
         self.timer_count = 0  # contador de tiempo para borrar historial local
         self.veces = 2
+        self.colecion = "Sensores"
 
     def contador(self, tiempo):
         for i in range(tiempo, -1, -1):
@@ -53,36 +54,89 @@ class main:
                     for i in data:
                         print(i)
                         # i es el json
-                        # if len(i["pines"]) == 1:
-                        #     # print(i["nombre"])
-                        #     # print(i["tipo"])
-                        #     # print(i["valores"])
-                        #     # print(i["dato"])
-                        #     # print(i["fecha"])
-                        #     # print(i["pines"][0])
-                        #     print("|{:<3} | {:<20} | {:<25} | {:<7}{:<4} | {:<10} | {:<5}|".format(x, i["nombre"],
-                        #                                                                        i["tipo"],
-                        #                                                                        i["valores"],
-                        #                                                                        i["dato"],
-                        #                                                                        i["fecha"],
-                        #                                                                        i["pines"][0]))
-                        # elif len(i["pines"]) == 2:
-                        #     # print(i["nombre"])
-                        #     # print(i["tipo"])
-                        #     # print(i["valores"])
-                        #     # print(i["dato"])
-                        #     # print(i["fecha"])
-                        #     # print(i["pines"][0])
-                        #     # print(i["pines"][1])
-                        #     print("|{:<3} | {:<20} | {:<25} | {:<7}{:<4} | {:<10} | {:<2} {:<2}|".format(x,i["nombre"],
-                        #                                                                         i["tipo"],
-                        #                                                                         i["valores"],
-                        #                                                                         i["dato"],
-                        #                                                                         i["fecha"],
-                        #                                                                         i["pines"][0],
-                        #                                                                         i["pines"][1]))
+                        if len(i["pines"]) == 1:
+                            # print(i["nombre"])
+                            # print(i["tipo"])
+                            # print(i["valores"])
+                            # print(i["dato"])
+                            # print(i["fecha"])
+                            # print(i["pines"][0])
+                            print("|{:<3} | {:<20} | {:<25} | {:<7}{:<4} | {:<10} | {:<5}|".format(x, i["nombre"],
+                                                                                               i["tipo"],
+                                                                                               i["valores"],
+                                                                                               i["dato"],
+                                                                                               i["fecha"],
+                                                                                               i["hora"],
+                                                                                               i["pines"][0]))
+                        elif len(i["pines"]) == 2:
+                            # print(i["nombre"])
+                            # print(i["tipo"])
+                            # print(i["valores"])
+                            # print(i["dato"])
+                            # print(i["fecha"])
+                            # print(i["pines"][0])
+                            # print(i["pines"][1])
+                            print("|{:<3} | {:<20} | {:<25} | {:<7}{:<4} | {:<10} | {:<2} {:<2}|".format(x,i["nombre"],
+                                                                                                i["tipo"],
+                                                                                                i["valores"],
+                                                                                                i["dato"],
+                                                                                                i["fecha"],
+                                                                                                i["hora"],
+                                                                                                i["pines"][0],
+                                                                                                i["pines"][1]))
+                            return i
 
     #                     Logica para insertar en docs:
+
+    def lectura2(self):
+        print("--------Lectura de sensores--------")
+        if self.bandera2 == 2:  # si esta en conexion
+            print("--------Conexion--------")
+            # lista = self.sensores.mostrar()
+            # if len(lista) >= 1:  # si la lista de sensores tiene objetos, debe ingresarlos a la bd antes de los otros
+            #     passo = 0
+            #     for i in lista:
+            #         if self.obj.find_one(self.colecion, i):
+            #             pass
+            #         else:
+            #             self.obj.insert_one(self.colecion, i)
+            #             passo = 1
+            #     if passo == 1:
+            #         self.sensores.borrarInfo("Sensores.json")
+            # print("Empezando..")
+            # while True:  # tiempo en segundos
+            #     aux = self.sensores.mostrar()
+            #     if len(aux) >= 1:
+            #         ubi = len(aux) - 1
+            #         if self.obj.find_one(self.colecion, aux[ubi]):
+            #             pass
+            #         else:
+            #             self.obj.insert_one(self.colecion, aux[ubi])
+            #     print("Enter presionado, deteniendo lectura de sensores")
+            #     self.main()
+            #     sens, val = self.disp.lectura()
+            #     # nombre, id = self.disp.nom.filter("clave", sens)
+            #     # sensor = Sensores(nombre[0]['nombre'], val)
+            #     # self.sensores.agregar(sensor.to_dict())
+            #     # print("|{:<25} {:<4}|".format(nombre[0]['nombre'], val))
+            #
+            #     if self.obj.insert_one(self.colecion,sensor.to_dict()) is False:  # si no se inserto, debe cambiar la bandera
+            #         self.bandera2 = 2
+            #         print("Se perdio la conexion, guardando solo localmente")
+            #         ultimoSensor = sensor.to_dict()  # guarda la lecutra donde sucede la desconexion
+            #         self.sensores.borrarInfo("Sensores.json")  # borra datos para no repetirlos
+            #         self.sensores.agregar(ultimoSensor)
+            #         self.lectura()  # debe regresar al metodo para empezar a guardar solo local
+
+        else:  # guarda solo local
+            while True:
+                print("Escritura..")
+                # user_input = input()
+                # if user_input == " ":
+                #     break
+                i = self.juntos()
+                sensor = Sensores(i["nombre"],i["tipo"],i["valores"],i["dato"],i["fecha"],i["hora"],i["pines"])
+                self.sensores.agregar(sensor.to_dict())
 
 
     def menu(self):

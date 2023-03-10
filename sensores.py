@@ -49,6 +49,7 @@ class sensor:
         timestamp = time.time()
         fecha_hora = datetime.datetime.fromtimestamp(timestamp)
         cadena_fecha_hora = fecha_hora.strftime('%H:%M:%S')
+        cadena_fecha= fecha_hora.strftime('%Y-%m-%d')
         data=[]
         if self.path == "tmp":
             if len(arreglo) > 1:
@@ -57,7 +58,8 @@ class sensor:
                     "tipo": self.tipo[0],
                     "valores": arreglo[0],
                     "dato": self.tipoDato[0],
-                    "fecha": cadena_fecha_hora,
+                    "fecha":cadena_fecha,
+                    "hora": cadena_fecha_hora,
                     "pines": self.pin
                 }
                 data.append(data1)
@@ -66,7 +68,8 @@ class sensor:
                     "tipo": self.tipo[1],
                     "valores": arreglo[1],
                     "dato": self.tipoDato[1],
-                    "fecha": cadena_fecha_hora,
+                    "fecha": cadena_fecha,
+                    "hora": cadena_fecha_hora,
                     "pines": self.pin
                 }
                 data.append(data2)
@@ -76,7 +79,8 @@ class sensor:
                 "tipo": self.tipo[0],
                 "valores": arreglo[0],
                 "dato":self.tipoDato[0],
-                "fecha": cadena_fecha_hora,
+                "fecha": cadena_fecha,
+                "hora": cadena_fecha_hora,
                 "pines": self.pin
             }
             data.append(data1)
