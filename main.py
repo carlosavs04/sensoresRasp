@@ -116,11 +116,10 @@ class main:
                 #     else:
                 #         self.obj.insert_one(self.colecion, aux[ubi])
                 i = self.sensoresLectura(sensores)
+                self.sensores.agregar(i.to_dict())
 
-                # self.sensores.agregar(i)
 
-
-                if self.obj.insert_one(self.colecion,y) is False:  # si no se inserto, debe cambiar la bandera
+                if self.obj.insert_one(self.colecion,i.to_dict()) is False:  # si no se inserto, debe cambiar la bandera
                     self.bandera2 = 2
                     print("Se perdio la conexion, guardando solo localmente")
                     ultimoSensor = i  # guarda la lecutra donde sucede la desconexion
@@ -138,9 +137,10 @@ class main:
                 # user_input = input()
                 # if user_input == " ":
                 #     break
-                i = self.sensoresLectura(sensores)
+                self.sensoresLectura(sensores)
 
-                # self.sensores.agregar(i)
+                i = self.sensoresLectura(sensores)
+                self.sensores.agregar(i.to_dict())
 
 
     def menu(self):
