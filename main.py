@@ -54,39 +54,39 @@ class main:
             data=json.loads(sens.lectura())
             if len(data)>=1:
                 for i in data:
-                    # print(i)
+                    print(i)
                     # i es el json
-                    if len(i["pines"]) == 1:
-                        # print(i["nombre"])
-                        # print(i["tipo"])
-                        # print(i["valores"])
-                        # print(i["dato"])
-                        # print(i["fecha"])
-                        # print(i["pines"][0])
-                        print("|{:<3} | {:<20} | {:<25} | {:<7}{:<4} | {:<10} | {:<10} | {:<5}|".format(x, i["nombre"],
-                                                                                           i["tipo"],
-                                                                                           i["valores"],
-                                                                                           i["dato"],
-                                                                                           i["fecha"],
-                                                                                           i["hora"],
-                                                                                           i["pines"][0]))
-                    elif len(i["pines"]) == 2:
-                        # print(i["nombre"])
-                        # print(i["tipo"])
-                        # print(i["valores"])
-                        # print(i["dato"])
-                        # print(i["fecha"])
-                        # print(i["pines"][0])
-                        # print(i["pines"][1])
-                        print("|{:<3} | {:<20} | {:<25} | {:<7}{:<4} | {:<10} | {:<2} {:<2}|".format(x,i["nombre"],
-                                                                                            i["tipo"],
-                                                                                            i["valores"],
-                                                                                            i["dato"],
-                                                                                            i["fecha"],
-                                                                                            i["hora"],
-                                                                                            i["pines"][0],
-                                                                                            i["pines"][1]))
-                        return i
+                    # if len(i["pines"]) == 1:
+                    #     # print(i["nombre"])
+                    #     # print(i["tipo"])
+                    #     # print(i["valores"])
+                    #     # print(i["dato"])
+                    #     # print(i["fecha"])
+                    #     # print(i["pines"][0])
+                    #     print("|{:<3} | {:<20} | {:<25} | {:<7}{:<4} | {:<10} | {:<10} | {:<5}|".format(x, i["nombre"],
+                    #                                                                        i["tipo"],
+                    #                                                                        i["valores"],
+                    #                                                                        i["dato"],
+                    #                                                                        i["fecha"],
+                    #                                                                        i["hora"],
+                    #                                                                        i["pines"][0]))
+                    # elif len(i["pines"]) == 2:
+                    #     # print(i["nombre"])
+                    #     # print(i["tipo"])
+                    #     # print(i["valores"])
+                    #     # print(i["dato"])
+                    #     # print(i["fecha"])
+                    #     # print(i["pines"][0])
+                    #     # print(i["pines"][1])
+                    #     print("|{:<3} | {:<20} | {:<25} | {:<7}{:<4} | {:<10} | {:<2} {:<2}|".format(x,i["nombre"],
+                    #                                                                         i["tipo"],
+                    #                                                                         i["valores"],
+                    #                                                                         i["dato"],
+                    #                                                                         i["fecha"],
+                    #                                                                         i["hora"],
+                    #                                                                         i["pines"][0],
+                    #                                                                         i["pines"][1]))
+                    return i
 
     #                     Logica para insertar en docs:
 
