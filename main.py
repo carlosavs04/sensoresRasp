@@ -44,7 +44,7 @@ class main:
         sensores=[temp,led]
         # sensores=[temp]
 
-        print("|{:<3} | {:<20} | {:<25} | {:<11} | {:<10} | {:<10} | {:<5}|".format("#","Nombre", "Tipo", "Valores", "Tiempo", "Pines"))
+        print("|{:<3} | {:<20} | {:<25} | {:<11} | {:<10} | {:<10} | {:<5}|".format("#","Nombre", "Tipo", "Valores", "Fecha" ,"Hora", "Pines"))
 
 
         x=0
