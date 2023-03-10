@@ -52,6 +52,12 @@ class sensor:
         cadena_fecha_hora = fecha_hora.strftime('%H:%M:%S')
         cadena_fecha= fecha_hora.strftime('%Y-%m-%d')
         data=[]
+        try:
+            self._id.is_valid()
+        except:
+            pass
+        else:
+            self._id=ObjectId
         if self.path == "tmp":
             if len(arreglo) > 1:
                 data1 = {
