@@ -71,7 +71,7 @@ class sensor:
             sensor1 = Sensores(self.path, self.nombre, self.tipo[0], arreglo[0], self.tipoDato[0], cadena_fecha, cadena_fecha_hora, self.pin, )
             data.append(sensor1)
         jsonS = json.dumps(data)
-        return jsonS , [sensor1]
+        return jsonS
 
 
 if __name__ == "__main__":
