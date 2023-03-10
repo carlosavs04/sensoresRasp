@@ -63,7 +63,6 @@ class sensor:
                     "fecha":cadena_fecha,
                     "hora": cadena_fecha_hora,
                     "pines": self.pin,
-                    "_id":str(self._id)
                 }
                 data.append(data1)
                 data2 = {
@@ -75,8 +74,6 @@ class sensor:
                     "fecha": cadena_fecha,
                     "hora": cadena_fecha_hora,
                     "pines": self.pin,
-                    "_id": str(self._id)
-
                 }
                 data.append(data2)
         else:
@@ -89,8 +86,6 @@ class sensor:
                 "fecha": cadena_fecha,
                 "hora": cadena_fecha_hora,
                 "pines": self.pin,
-                "_id": str(self._id)
-
             }
             data.append(data1)
         jsonS = json.dumps(data)
