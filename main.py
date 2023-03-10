@@ -116,8 +116,9 @@ class main:
                 i = self.sensoresLectura(sensores)
 
                 self.sensores.agregar(i)
+                y=i
 
-                if self.obj.insert_one(self.colecion,i) is False:  # si no se inserto, debe cambiar la bandera
+                if self.obj.insert_one(self.colecion,y) is False:  # si no se inserto, debe cambiar la bandera
                     self.bandera2 = 2
                     print("Se perdio la conexion, guardando solo localmente")
                     ultimoSensor = i  # guarda la lecutra donde sucede la desconexion
