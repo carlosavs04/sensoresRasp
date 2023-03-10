@@ -58,7 +58,7 @@ class main:
             self.hiloBorrarPTiempo()
         while True:
             for sens in sensores:
-                z=z+1
+                z=sensores.index()
                 # print(sens.lectura())
                 data=json.loads(sens.lectura())
                 if len(data)>=1:
