@@ -1,9 +1,24 @@
 import time
-
+from interBD import interBD
+from Mongo import Mongo
 from sensores import sensor
 import json
 
 class main:
+    def __init__(self):
+        self.ultLectura = ultimaLectura
+        self.bandera = 0
+        self.dispositivo = ""
+        self.mongo = Mongo()
+        self.obj = Mongo()
+        self.tiempoEspera = 60  # tiempo en segundos
+        self.timer_count = 0  # contador de tiempo para borrar historial local
+        self.veces = 2
+
+    def contador(self, tiempo):
+        for i in range(tiempo, -1, -1):
+            time.sleep(1)
+        return True
     def main(self):
         opcion = ""
         while opcion != "5":
@@ -19,9 +34,6 @@ class main:
                 input("Presione Enter para continuar...")
 
     def juntos(self):
-
-        # led1 = Led(17)
-
         temp = sensor("tmp", [5], "Cocina")
         ult = sensor("ult",[23,24],"Puerta")
         led = sensor("led",[17],"Foco")
@@ -38,37 +50,60 @@ class main:
                 data=json.loads(sens.lectura())
                 if len(data)>=1:
                     for i in data:
+                        print(i)
                         # i es el json
-                        if len(i["pines"]) == 1:
-                            # print(i["nombre"])
-                            # print(i["tipo"])
-                            # print(i["valores"])
-                            # print(i["dato"])
-                            # print(i["fecha"])
-                            # print(i["pines"][0])
-                            print("|{:<3} | {:<20} | {:<25} | {:<7}{:<4} | {:<10} | {:<5}|".format(x, i["nombre"],
-                                                                                               i["tipo"],
-                                                                                               i["valores"],
-                                                                                               i["dato"],
-                                                                                               i["fecha"],
-                                                                                               i["pines"][0]))
-                        elif len(i["pines"]) == 2:
-                            # print(i["nombre"])
-                            # print(i["tipo"])
-                            # print(i["valores"])
-                            # print(i["dato"])
-                            # print(i["fecha"])
-                            # print(i["pines"][0])
-                            # print(i["pines"][1])
-                            print("|{:<3} | {:<20} | {:<25} | {:<7}{:<4} | {:<10} | {:<2} {:<2}|".format(x,i["nombre"],
-                                                                                                i["tipo"],
-                                                                                                i["valores"],
-                                                                                                i["dato"],
-                                                                                                i["fecha"],
-                                                                                                i["pines"][0],
-                                                                                                i["pines"][1]))
+                        # if len(i["pines"]) == 1:
+                        #     # print(i["nombre"])
+                        #     # print(i["tipo"])
+                        #     # print(i["valores"])
+                        #     # print(i["dato"])
+                        #     # print(i["fecha"])
+                        #     # print(i["pines"][0])
+                        #     print("|{:<3} | {:<20} | {:<25} | {:<7}{:<4} | {:<10} | {:<5}|".format(x, i["nombre"],
+                        #                                                                        i["tipo"],
+                        #                                                                        i["valores"],
+                        #                                                                        i["dato"],
+                        #                                                                        i["fecha"],
+                        #                                                                        i["pines"][0]))
+                        # elif len(i["pines"]) == 2:
+                        #     # print(i["nombre"])
+                        #     # print(i["tipo"])
+                        #     # print(i["valores"])
+                        #     # print(i["dato"])
+                        #     # print(i["fecha"])
+                        #     # print(i["pines"][0])
+                        #     # print(i["pines"][1])
+                        #     print("|{:<3} | {:<20} | {:<25} | {:<7}{:<4} | {:<10} | {:<2} {:<2}|".format(x,i["nombre"],
+                        #                                                                         i["tipo"],
+                        #                                                                         i["valores"],
+                        #                                                                         i["dato"],
+                        #                                                                         i["fecha"],
+                        #                                                                         i["pines"][0],
+                        #                                                                         i["pines"][1]))
+
+    #                     Logica para insertar en docs:
+
 
     def menu(self):
+        print("----------------------------------------------")
+        print("Sistema de gestión de dispositivos raspberry")
+        if self.veces == 2:
+            resultado = interBD().checkarConexionEnUso()
+            if resultado:
+                self.bandera2 = 1
+                self.obj = resultado[0]
+                self.obj.conect()
+                self.bandera = resultado[1]
+                print(f"Datos de conexion: {self.obj.user}-{self.obj.cluster}-{self.obj.bd}------")
+                print(f"Estado: {self.bandera}")
+                self.veces = 1
+
+            else:
+                self.bandera2 = 2
+                self.veces = 1
+                print("No hay conexion activa")
+            self.hiloBorrarPTiempo()
+        print(f"----Puerto: {self.disp.puerto}-----")
         print("------------Menu------------")
         print("1. Sensores")
         print("5. Salir")
@@ -76,6 +111,11 @@ class main:
         opcion = input("Seleccione una opción: ")
         return opcion
 
+    def ultimaLectura(self):
+        sensores = self.sensores.from_json()
+        print("|{:<25} {:<5}|".format("Sensor", "Valor"))
+        for sens in sensores:
+            print("|{:<25} {:<5}|".format(sens.nombre, sens.valor))
 
 if __name__ == "__main__":
     main().main()
