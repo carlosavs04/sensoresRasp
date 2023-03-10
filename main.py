@@ -138,7 +138,7 @@ class main:
     def menu(self):
         print("----------------------------------------------")
         print("Sistema de gestión de dispositivos raspberry")
-        if self.veces == 1:
+        if self.veces == 2:
             resultado = interBD().checkarConexionEnUso()
             if resultado:
                 self.bandera2 = 1
