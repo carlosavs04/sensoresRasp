@@ -39,14 +39,23 @@ class main:
                 print("Opción inválida, intente de nuevo.")
                 input("Presione Enter para continuar...")
 
-    def sensoresLectura(self, arreglo):
-        # temp = sensor("tmp", [5], "Cocina")
-        # ult = sensor("ult",[23,24],"Puerta")
-        # led = sensor("led",[17],"Foco")
-        # sensores=[temp,led, ult]
-        sensores=arreglo
+    def sensoresLectura(self):
+        temp = sensor("tmp", [5], "Cocina")
+        ult = sensor("ult",[23,24],"Puerta")
+        led = sensor("led",[17],"Foco")
+        sensores=[temp,led, ult]
         # sensores=[temp]
         x=0
+        if self.bandera2 == 1:  # si esta en conexion
+            lista = self.sensores.mostrar()
+            if len(lista) >= 1:  # si la lista de sensores tiene objetos, debe ingresarlos a la bd antes de los otros
+                for x in lista:
+                    if self.obj.find_one(self.colecion, x):
+                        pass
+                    else:
+                        self.obj.insert_one(self.colecion, x)
+                self.sensores.borrarInfo("Sensores.json")
+            self.hiloBorrarPTiempo()
         for sens in sensores:
             x=x+1
             # print(sens.lectura())
@@ -56,7 +65,7 @@ class main:
                     # print(i)
                     # i es el json
                     print(i)
-                    sensor1 = Sensores(i["clave"],i["nombre"],i["tipo"],i["valores"],i["dato"],i["fecha"],i["hora"],i["pines"])
+                    # sensor1 = Sensores(i["clave"],i["nombre"],i["tipo"],i["valores"],i["dato"],i["fecha"],i["hora"],i["pines"])
                     # if len(i["pines"]) == 1:
                     #     # print(i["nombre"])
                     #     # print(i["tipo"])
@@ -87,63 +96,17 @@ class main:
                     #                                                                         i["hora"],
                     #                                                                         i["pines"][0],
                     #                                                                         i["pines"][1]))
-                    self.sensores.agregar(sensor1)
-                    return sensor1
+                    self.sensores.agregar(i)
+                    self.guardar(i)
 
-    #                     Logica para insertar en docs:
-
-    def lectura2(self):
-        temp = sensor("tmp", [5], "Cocina")
-        ult = sensor("ult", [23, 24], "Puerta")
-        led = sensor("led", [17], "Foco")
-        sensores = [temp, led, ult]
-        if self.bandera2 == 1:  # si esta en conexion
-            lista = self.sensores.mostrar()
-            if len(lista) >= 1:  # si la lista de sensores tiene objetos, debe ingresarlos a la bd antes de los otros
-                for x in lista:
-                    if self.obj.find_one(self.colecion, x):
-                        pass
-                    else:
-                        self.obj.insert_one(self.colecion, x)
-                self.sensores.borrarInfo("Sensores.json")
-            self.hiloBorrarPTiempo()
-
-            while True:  # tiempo en segundos
-                # aux = self.sensores.mostrar()
-                # if len(aux) >= 1:
-                #     ubi = len(aux) - 1
-                #     if self.obj.find_one(self.colecion, aux[ubi]):
-                #         pass
-                #     else:
-                #         self.obj.insert_one(self.colecion, aux[ubi])
-                i = self.sensoresLectura(sensores)
-                print(i.to_dict())
-                # self.sensores.agregar(i.to_dict())
-
-
-                # if self.obj.insert_one(self.colecion,i.to_dict()) is False:  # si no se inserto, debe cambiar la bandera
-                #     self.bandera2 = 2
-                #     print("Se perdio la conexion, guardando solo localmente")
-                #     ultimoSensor = i  # guarda la lecutra donde sucede la desconexion
-                #     self.sensores.borrarInfo("Sensores.json")  # borra datos para no repetirlos
-                #     self.sensores.agregar(ultimoSensor)
-                #     self.lectura2()  # debe regresar al metodo para empezar a guardar solo local
-
-
-        else:  # guarda solo local-----ya funciona este
-            print("Guardando localmente..")
-            print(
-                "|{:<3} | {:<20} | {:<25} | {:<11} | {:<10} | {:<10} | {:<5}|".format("#", "Nombre", "Tipo", "Valores",
-                                                                                      "Fecha", "Hora", "Pines"))
-            while True:
-                # user_input = input()
-                # if user_input == " ":
-                #     break
-                self.sensoresLectura(sensores)
-
-                i = self.sensoresLectura(sensores)
-                self.sensores.agregar(i.to_dict())
-
+    def guardar(self,sensor):
+        if self.obj.insert_one(self.colecion,sensor()) is False:  # si no se inserto, debe cambiar la bandera
+            self.bandera2 = 2
+            print("Se perdio la conexion, guardando solo localmente")
+            ultimoSensor = sensor  # guarda la lecutra donde sucede la desconexion
+            self.sensores.borrarInfo("Sensores.json")  # borra datos para no repetirlos
+            self.sensores.agregar(ultimoSensor)
+            self.sensoresLectura()  # debe regresar al metodo para empezar a guardar solo local
 
     def menu(self):
         print("----------------------------------------------")
