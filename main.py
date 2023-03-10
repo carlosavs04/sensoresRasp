@@ -43,7 +43,7 @@ class main:
         temp = sensor("tmp", [5], "Cocina")
         ult = sensor("ult",[23,24],"Puerta")
         led = sensor("led",[17],"Foco")
-        sensores=[temp,led]
+        sensores=[temp,led, ult]
         # sensores=[temp]
         x=0
         for sens in sensores:
