@@ -45,10 +45,6 @@ class main:
         led = sensor("led",[17],"Foco")
         sensores=[temp,led]
         # sensores=[temp]
-
-        print("|{:<3} | {:<20} | {:<25} | {:<11} | {:<10} | {:<10} | {:<5}|".format("#","Nombre", "Tipo", "Valores", "Fecha" ,"Hora", "Pines"))
-
-
         x=0
         for sens in sensores:
             x=x+1
@@ -105,7 +101,10 @@ class main:
                         self.obj.insert_one(self.colecion, i)
                 self.sensores.borrarInfo("Sensores.json")
             self.hiloBorrarPTiempo()
-            print("Empezando..")
+            print(f"Guardando en {self.obj.bd} - {self.colecion}..")
+            print(
+                "|{:<3} | {:<20} | {:<25} | {:<11} | {:<10} | {:<10} | {:<5}|".format("#", "Nombre", "Tipo", "Valores",
+                                                                                      "Fecha", "Hora", "Pines"))
             while True:  # tiempo en segundos
                 # aux = self.sensores.mostrar()
                 # if len(aux) >= 1:
@@ -128,7 +127,10 @@ class main:
 
 
         else:  # guarda solo local-----ya funciona este
-            print("Escritura..")
+            print("Guardando localmente..")
+            print(
+                "|{:<3} | {:<20} | {:<25} | {:<11} | {:<10} | {:<10} | {:<5}|".format("#", "Nombre", "Tipo", "Valores",
+                                                                                      "Fecha", "Hora", "Pines"))
             while True:
                 # user_input = input()
                 # if user_input == " ":
@@ -178,6 +180,7 @@ class main:
             if self.timer_count >= self.tiempoEspera / 60:  # verifica si han pasado 15 minutos
                 self.sensores.borrarInfo("Sensores.json")
                 print("Se borro historial local")
+                print("---------------------------------------------------------------")
                 self.timer_count = 0  # resetea el contador de tiempo
         else:
             print("Se reinicio el contador")
