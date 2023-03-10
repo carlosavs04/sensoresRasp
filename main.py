@@ -94,8 +94,6 @@ class main:
         ult = sensor("ult", [23, 24], "Puerta")
         led = sensor("led", [17], "Foco")
         sensores = [temp, led, ult]
-        i = self.sensoresLectura(sensores)
-
         if self.bandera2 == 1:  # si esta en conexion
             lista = self.sensores.mostrar()
             if len(lista) >= 1:  # si la lista de sensores tiene objetos, debe ingresarlos a la bd antes de los otros
@@ -115,6 +113,7 @@ class main:
                 #         pass
                 #     else:
                 #         self.obj.insert_one(self.colecion, aux[ubi])
+                i = self.sensoresLectura(sensores)
 
                 self.sensores.agregar(i)
 
@@ -136,6 +135,8 @@ class main:
                 # user_input = input()
                 # if user_input == " ":
                 #     break
+                i = self.sensoresLectura(sensores)
+
                 self.sensores.agregar(i)
 
 
