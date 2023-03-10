@@ -55,7 +55,7 @@ class main:
                 for i in data:
                     # print(i)
                     # i es el json
-                    sensor1 = Sensores(i["nombre"],i["tipo"],i["valores"],i["dato"],i["fecha"],i["hora"],i["pines"])
+                    sensor1 = Sensores(i["path"],i["nombre"],i["tipo"],i["valores"],i["dato"],i["fecha"],i["hora"],i["pines"])
                     print(sensor1.to_dict())
                     if len(i["pines"]) == 1:
                         # print(i["nombre"])
