@@ -100,7 +100,7 @@ class main:
                     self.guardar(i)
 
     def guardar(self,sensor):
-        if self.obj.insert_one(self.colecion,sensor()) is False:  # si no se inserto, debe cambiar la bandera
+        if self.obj.insert_one(self.colecion,sensor) is False:  # si no se inserto, debe cambiar la bandera
             self.bandera2 = 2
             print("Se perdio la conexion, guardando solo localmente")
             ultimoSensor = sensor  # guarda la lecutra donde sucede la desconexion
