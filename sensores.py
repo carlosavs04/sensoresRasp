@@ -4,7 +4,7 @@ from led import Led
 import time
 import json
 import datetime
-
+from bson import ObjectId
 class sensor:
     def __init__(self,path="",pin=[],nombre=""):
         self.path=path
@@ -15,6 +15,7 @@ class sensor:
         if self.path == "led":
             self.led1 = Led(self.pin[0])
         self.tipoDato = [""]
+        self._id = ObjectId()
     def tipoSensor(self):
         valores=[]
         self.tipo=""
@@ -61,7 +62,8 @@ class sensor:
                     "dato": self.tipoDato[0],
                     "fecha":cadena_fecha,
                     "hora": cadena_fecha_hora,
-                    "pines": self.pin
+                    "pines": self.pin,
+                    "_id":self._id
                 }
                 data.append(data1)
                 data2 = {
@@ -72,7 +74,8 @@ class sensor:
                     "dato": self.tipoDato[1],
                     "fecha": cadena_fecha,
                     "hora": cadena_fecha_hora,
-                    "pines": self.pin
+                    "pines": self.pin,
+                    "_id": self._id
                 }
                 data.append(data2)
         else:
@@ -84,7 +87,8 @@ class sensor:
                 "dato":self.tipoDato[0],
                 "fecha": cadena_fecha,
                 "hora": cadena_fecha_hora,
-                "pines": self.pin
+                "pines": self.pin,
+                "_id": self._id
             }
             data.append(data1)
         jsonS = json.dumps(data)
