@@ -26,6 +26,8 @@ class main:
         while opcion != "5":
             opcion = self.menu()
             if opcion == "1":
+                self.lectura2()
+            if opcion == "2":
                 self.juntos()
             elif opcion == "5":
                 # Salir
