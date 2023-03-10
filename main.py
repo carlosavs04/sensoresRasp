@@ -92,7 +92,7 @@ class main:
 
     def lectura2(self):
         print("--------Lectura de sensores--------")
-        if self.bandera2 == 2:  # si esta en conexion
+        if self.bandera2 == 1:  # si esta en conexion
             print("--------Conexion--------")
             lista = self.sensores.mostrar()
             if len(lista) >= 1:  # si la lista de sensores tiene objetos, debe ingresarlos a la bd antes de los otros
@@ -126,8 +126,8 @@ class main:
 
 
         else:  # guarda solo local-----ya funciona este
+            print("Escritura..")
             while True:
-                print("Escritura..")
                 # user_input = input()
                 # if user_input == " ":
                 #     break
