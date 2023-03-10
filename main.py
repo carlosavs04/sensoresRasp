@@ -94,6 +94,7 @@ class main:
             print("--------Conexion--------")
             lista = self.sensores.mostrar()
             if len(lista) >= 1:  # si la lista de sensores tiene objetos, debe ingresarlos a la bd antes de los otros
+                print("Subiendo datos no encontrados en la bd")
                 for i in lista:
                     if self.obj.find_one(self.colecion, i):
                         pass
