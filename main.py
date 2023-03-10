@@ -26,7 +26,7 @@ class main:
         while opcion != "5":
             opcion = self.menu()
             if opcion == "1":
-                self.lectura2()
+                self.sensoresLectura()
             if opcion == "2":
                 interBD().mainBd()
             # elif opcion == "7":
