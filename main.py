@@ -45,7 +45,7 @@ class main:
         led = sensor("led",[17],"Foco")
         sensores=[temp,led, ult]
         # sensores=[temp]
-        x=0
+        z=0
         if self.bandera2 == 1:  # si esta en conexion
             lista = self.sensores.mostrar()
             if len(lista) >= 1:  # si la lista de sensores tiene objetos, debe ingresarlos a la bd antes de los otros
@@ -57,7 +57,7 @@ class main:
                 self.sensores.borrarInfo("Sensores.json")
             self.hiloBorrarPTiempo()
         for sens in sensores:
-            x=x+1
+            z=z+1
             # print(sens.lectura())
             data=json.loads(sens.lectura())
             if len(data)>=1:
