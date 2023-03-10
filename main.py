@@ -104,7 +104,6 @@ class main:
                 self.veces = 1
                 print("No hay conexion activa")
             self.hiloBorrarPTiempo()
-        print(f"----Puerto: {self.disp.puerto}-----")
         print("------------Menu------------")
         print("1. Sensores")
         print("5. Salir")
