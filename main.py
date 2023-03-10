@@ -12,7 +12,7 @@ class main:
         self.dispositivo = ""
         self.mongo = Mongo()
         self.obj = Mongo()
-        self.tiempoEspera = 60  # tiempo en segundos
+        self.tiempoEspera = 120  # tiempo en segundos
         self.timer_count = 0  # contador de tiempo para borrar historial local
         self.veces = 2
         self.colecion = "Sensores"
@@ -44,7 +44,7 @@ class main:
         sensores=[temp,led]
         # sensores=[temp]
 
-        print("|{:<3} | {:<20} | {:<25} | {:<11} | {:<10} | {:<5}|".format("#","Nombre", "Tipo", "Valores", "Tiempo", "Pines"))
+        print("|{:<3} | {:<20} | {:<25} | {:<11} | {:<10} | {:<10} | {:<5}|".format("#","Nombre", "Tipo", "Valores", "Tiempo", "Pines"))
 
 
         x=0
@@ -56,36 +56,36 @@ class main:
                 for i in data:
                     # print(i)
                     # i es el json
-                    # if len(i["pines"]) == 1:
-                    #     # print(i["nombre"])
-                    #     # print(i["tipo"])
-                    #     # print(i["valores"])
-                    #     # print(i["dato"])
-                    #     # print(i["fecha"])
-                    #     # print(i["pines"][0])
-                    #     print("|{:<3} | {:<20} | {:<25} | {:<7}{:<4} | {:<10} | {:<5}|".format(x, i["nombre"],
-                    #                                                                        i["tipo"],
-                    #                                                                        i["valores"],
-                    #                                                                        i["dato"],
-                    #                                                                        i["fecha"],
-                    #                                                                        i["hora"],
-                    #                                                                        i["pines"][0]))
-                    # elif len(i["pines"]) == 2:
-                    #     # print(i["nombre"])
-                    #     # print(i["tipo"])
-                    #     # print(i["valores"])
-                    #     # print(i["dato"])
-                    #     # print(i["fecha"])
-                    #     # print(i["pines"][0])
-                    #     # print(i["pines"][1])
-                    #     print("|{:<3} | {:<20} | {:<25} | {:<7}{:<4} | {:<10} | {:<2} {:<2}|".format(x,i["nombre"],
-                    #                                                                         i["tipo"],
-                    #                                                                         i["valores"],
-                    #                                                                         i["dato"],
-                    #                                                                         i["fecha"],
-                    #                                                                         i["hora"],
-                    #                                                                         i["pines"][0],
-                    #                                                                         i["pines"][1]))
+                    if len(i["pines"]) == 1:
+                        # print(i["nombre"])
+                        # print(i["tipo"])
+                        # print(i["valores"])
+                        # print(i["dato"])
+                        # print(i["fecha"])
+                        # print(i["pines"][0])
+                        print("|{:<3} | {:<20} | {:<25} | {:<7}{:<4} | {:<10} | {:<10} | {:<5}|".format(x, i["nombre"],
+                                                                                           i["tipo"],
+                                                                                           i["valores"],
+                                                                                           i["dato"],
+                                                                                           i["fecha"],
+                                                                                           i["hora"],
+                                                                                           i["pines"][0]))
+                    elif len(i["pines"]) == 2:
+                        # print(i["nombre"])
+                        # print(i["tipo"])
+                        # print(i["valores"])
+                        # print(i["dato"])
+                        # print(i["fecha"])
+                        # print(i["pines"][0])
+                        # print(i["pines"][1])
+                        print("|{:<3} | {:<20} | {:<25} | {:<7}{:<4} | {:<10} | {:<2} {:<2}|".format(x,i["nombre"],
+                                                                                            i["tipo"],
+                                                                                            i["valores"],
+                                                                                            i["dato"],
+                                                                                            i["fecha"],
+                                                                                            i["hora"],
+                                                                                            i["pines"][0],
+                                                                                            i["pines"][1]))
                         return i
 
     #                     Logica para insertar en docs:
@@ -94,59 +94,51 @@ class main:
         print("--------Lectura de sensores--------")
         if self.bandera2 == 2:  # si esta en conexion
             print("--------Conexion--------")
-            # lista = self.sensores.mostrar()
-            # if len(lista) >= 1:  # si la lista de sensores tiene objetos, debe ingresarlos a la bd antes de los otros
-            #     passo = 0
-            #     for i in lista:
-            #         if self.obj.find_one(self.colecion, i):
-            #             pass
-            #         else:
-            #             self.obj.insert_one(self.colecion, i)
-            #             passo = 1
-            #     if passo == 1:
-            #         self.sensores.borrarInfo("Sensores.json")
-            # print("Empezando..")
-            # while True:  # tiempo en segundos
-            #     aux = self.sensores.mostrar()
-            #     if len(aux) >= 1:
-            #         ubi = len(aux) - 1
-            #         if self.obj.find_one(self.colecion, aux[ubi]):
-            #             pass
-            #         else:
-            #             self.obj.insert_one(self.colecion, aux[ubi])
-            #     print("Enter presionado, deteniendo lectura de sensores")
-            #     self.main()
-            #     sens, val = self.disp.lectura()
-            #     # nombre, id = self.disp.nom.filter("clave", sens)
-            #     # sensor = Sensores(nombre[0]['nombre'], val)
-            #     # self.sensores.agregar(sensor.to_dict())
-            #     # print("|{:<25} {:<4}|".format(nombre[0]['nombre'], val))
-            #
-            #     if self.obj.insert_one(self.colecion,sensor.to_dict()) is False:  # si no se inserto, debe cambiar la bandera
-            #         self.bandera2 = 2
-            #         print("Se perdio la conexion, guardando solo localmente")
-            #         ultimoSensor = sensor.to_dict()  # guarda la lecutra donde sucede la desconexion
-            #         self.sensores.borrarInfo("Sensores.json")  # borra datos para no repetirlos
-            #         self.sensores.agregar(ultimoSensor)
-            #         self.lectura()  # debe regresar al metodo para empezar a guardar solo local
+            lista = self.sensores.mostrar()
+            if len(lista) >= 1:  # si la lista de sensores tiene objetos, debe ingresarlos a la bd antes de los otros
+                for i in lista:
+                    if self.obj.find_one(self.colecion, i):
+                        pass
+                    else:
+                        self.obj.insert_one(self.colecion, i)
+                self.sensores.borrarInfo("Sensores.json")
+            self.hiloBorrarPTiempo()
+            print("Empezando..")
+            while True:  # tiempo en segundos
+                # aux = self.sensores.mostrar()
+                # if len(aux) >= 1:
+                #     ubi = len(aux) - 1
+                #     if self.obj.find_one(self.colecion, aux[ubi]):
+                #         pass
+                #     else:
+                #         self.obj.insert_one(self.colecion, aux[ubi])
 
-        else:  # guarda solo local
+                i = self.juntos()
+                self.sensores.agregar(i)
+
+                if self.obj.insert_one(self.colecion,i) is False:  # si no se inserto, debe cambiar la bandera
+                    self.bandera2 = 2
+                    print("Se perdio la conexion, guardando solo localmente")
+                    ultimoSensor = i  # guarda la lecutra donde sucede la desconexion
+                    self.sensores.borrarInfo("Sensores.json")  # borra datos para no repetirlos
+                    self.sensores.agregar(ultimoSensor)
+                    self.lectura2()  # debe regresar al metodo para empezar a guardar solo local
+
+
+        else:  # guarda solo local-----ya funciona este
             while True:
                 print("Escritura..")
                 # user_input = input()
                 # if user_input == " ":
                 #     break
                 i = self.juntos()
-                sensor = Sensores(i["clave"],i["nombre"],i["tipo"],i["valores"],i["dato"],i["fecha"],i["hora"],i["pines"])
-                print(sensor.to_dict())
-                print(i)
                 self.sensores.agregar(i)
 
 
     def menu(self):
         print("----------------------------------------------")
         print("Sistema de gestión de dispositivos raspberry")
-        if self.veces == 2:
+        if self.veces == 1:
             resultado = interBD().checkarConexionEnUso()
             if resultado:
                 self.bandera2 = 1
@@ -161,7 +153,6 @@ class main:
                 self.bandera2 = 2
                 self.veces = 1
                 print("No hay conexion activa")
-            self.hiloBorrarPTiempo()
         print("------------Menu------------")
         print("1. Sensores")
         print("5. Salir")
@@ -182,7 +173,7 @@ class main:
         if self.bandera2 == 1:  # si esta en conexion
             self.timer_count += 1  # incrementa el contador de tiempo
             if self.timer_count >= self.tiempoEspera / 60:  # verifica si han pasado 15 minutos
-                # self.sensores.borrarInfo("Sensores.json")
+                self.sensores.borrarInfo("Sensores.json")
                 print("Se borro historial local")
                 self.timer_count = 0  # resetea el contador de tiempo
         else:
