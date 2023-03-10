@@ -57,37 +57,36 @@ class main:
                     # i es el json
                     print(i)
                     sensor1 = Sensores(i["clave"],i["nombre"],i["tipo"],i["valores"],i["dato"],i["fecha"],i["hora"],i["pines"])
-                    print(sensor1.to_dict())
-                    if len(i["pines"]) == 1:
-                        # print(i["nombre"])
-                        # print(i["tipo"])
-                        # print(i["valores"])
-                        # print(i["dato"])
-                        # print(i["fecha"])
-                        # print(i["pines"][0])
-                        print("|{:<3} | {:<20} | {:<25} | {:<7}{:<4} | {:<10} | {:<10} | {:<5}|".format(x, i["nombre"],
-                                                                                           i["tipo"],
-                                                                                           i["valores"],
-                                                                                           i["dato"],
-                                                                                           i["fecha"],
-                                                                                           i["hora"],
-                                                                                           i["pines"][0]))
-                    elif len(i["pines"]) == 2:
-                        # print(i["nombre"])
-                        # print(i["tipo"])
-                        # print(i["valores"])
-                        # print(i["dato"])
-                        # print(i["fecha"])
-                        # print(i["pines"][0])
-                        # print(i["pines"][1])
-                        print("|{:<3} | {:<20} | {:<25} | {:<7}{:<4} | {:<10} | {:<2} {:<2}|".format(x,i["nombre"],
-                                                                                            i["tipo"],
-                                                                                            i["valores"],
-                                                                                            i["dato"],
-                                                                                            i["fecha"],
-                                                                                            i["hora"],
-                                                                                            i["pines"][0],
-                                                                                            i["pines"][1]))
+                    # if len(i["pines"]) == 1:
+                    #     # print(i["nombre"])
+                    #     # print(i["tipo"])
+                    #     # print(i["valores"])
+                    #     # print(i["dato"])
+                    #     # print(i["fecha"])
+                    #     # print(i["pines"][0])
+                    #     print("|{:<3} | {:<20} | {:<25} | {:<7}{:<4} | {:<10} | {:<10} | {:<5}|".format(x, i["nombre"],
+                    #                                                                        i["tipo"],
+                    #                                                                        i["valores"],
+                    #                                                                        i["dato"],
+                    #                                                                        i["fecha"],
+                    #                                                                        i["hora"],
+                    #                                                                        i["pines"][0]))
+                    # elif len(i["pines"]) == 2:
+                    #     # print(i["nombre"])
+                    #     # print(i["tipo"])
+                    #     # print(i["valores"])
+                    #     # print(i["dato"])
+                    #     # print(i["fecha"])
+                    #     # print(i["pines"][0])
+                    #     # print(i["pines"][1])
+                    #     print("|{:<3} | {:<20} | {:<25} | {:<7}{:<4} | {:<10} | {:<2} {:<2}|".format(x,i["nombre"],
+                    #                                                                         i["tipo"],
+                    #                                                                         i["valores"],
+                    #                                                                         i["dato"],
+                    #                                                                         i["fecha"],
+                    #                                                                         i["hora"],
+                    #                                                                         i["pines"][0],
+                    #                                                                         i["pines"][1]))
                     self.sensores.agregar(sensor1)
                     return sensor1
 
@@ -118,16 +117,17 @@ class main:
                 #     else:
                 #         self.obj.insert_one(self.colecion, aux[ubi])
                 i = self.sensoresLectura(sensores)
-                self.sensores.agregar(i.to_dict())
+                print(i.to_dict())
+                # self.sensores.agregar(i.to_dict())
 
 
-                if self.obj.insert_one(self.colecion,i.to_dict()) is False:  # si no se inserto, debe cambiar la bandera
-                    self.bandera2 = 2
-                    print("Se perdio la conexion, guardando solo localmente")
-                    ultimoSensor = i  # guarda la lecutra donde sucede la desconexion
-                    self.sensores.borrarInfo("Sensores.json")  # borra datos para no repetirlos
-                    self.sensores.agregar(ultimoSensor)
-                    self.lectura2()  # debe regresar al metodo para empezar a guardar solo local
+                # if self.obj.insert_one(self.colecion,i.to_dict()) is False:  # si no se inserto, debe cambiar la bandera
+                #     self.bandera2 = 2
+                #     print("Se perdio la conexion, guardando solo localmente")
+                #     ultimoSensor = i  # guarda la lecutra donde sucede la desconexion
+                #     self.sensores.borrarInfo("Sensores.json")  # borra datos para no repetirlos
+                #     self.sensores.agregar(ultimoSensor)
+                #     self.lectura2()  # debe regresar al metodo para empezar a guardar solo local
 
 
         else:  # guarda solo local-----ya funciona este
