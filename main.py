@@ -55,6 +55,7 @@ class main:
                 for i in data:
                     # print(i)
                     # i es el json
+                    sensor1 = Sensores(i["nombre"],i["tipo"],i["valores"],i["dato"],i["fecha"],i["hora"],i["pines"])
                     if len(i["pines"]) == 1:
                         # print(i["nombre"])
                         # print(i["tipo"])
@@ -85,7 +86,8 @@ class main:
                                                                                             i["hora"],
                                                                                             i["pines"][0],
                                                                                             i["pines"][1]))
-                    return i
+                    self.sensores.agregar(sensor1)
+                    return sensor1
 
     #                     Logica para insertar en docs:
 
@@ -115,8 +117,8 @@ class main:
                 #         self.obj.insert_one(self.colecion, aux[ubi])
                 i = self.sensoresLectura(sensores)
 
-                self.sensores.agregar(i)
-                y=i
+                # self.sensores.agregar(i)
+
 
                 if self.obj.insert_one(self.colecion,y) is False:  # si no se inserto, debe cambiar la bandera
                     self.bandera2 = 2
@@ -138,7 +140,7 @@ class main:
                 #     break
                 i = self.sensoresLectura(sensores)
 
-                self.sensores.agregar(i)
+                # self.sensores.agregar(i)
 
 
     def menu(self):
