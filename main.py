@@ -76,7 +76,8 @@ class main:
                         elif len(i["pines"]) == 2:
                             print("|{:<3} | {:<20} | {:<25} | {:<7}{:<4} | {:<10} | {:<2} {:<2}|".format(z,i["nombre"],i["tipo"],i["valores"],i["dato"],i["fecha"],i["hora"],i["pines"][0],i["pines"][1]))
                         self.sensores.agregar(i)
-                        self.guardar(i)
+                        if self.bandera2==1:
+                            self.guardar(i)
 
     def guardar(self,sensor):
 
