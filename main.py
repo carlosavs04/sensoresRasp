@@ -3,6 +3,7 @@ from interBD import interBD
 from Mongo import Mongo
 from sensores import sensor
 import json
+from ultimaLectura import ultimaLectura
 
 class main:
     def __init__(self):
