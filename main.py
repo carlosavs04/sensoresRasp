@@ -56,7 +56,7 @@ class main:
                     # print(i)
                     # i es el json
                     print(i)
-                    sensor1 = Sensores(i["path"],i["nombre"],i["tipo"],i["valores"],i["dato"],i["fecha"],i["hora"],i["pines"])
+                    sensor1 = Sensores(i["clave"],i["nombre"],i["tipo"],i["valores"],i["dato"],i["fecha"],i["hora"],i["pines"])
                     print(sensor1.to_dict())
                     if len(i["pines"]) == 1:
                         # print(i["nombre"])
