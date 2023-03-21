@@ -5,13 +5,13 @@ import time
 import json
 import datetime
 from bson import ObjectId
-from Lectura import Sensores
+from Lectura import Lectura
 class sensor:
     def __init__(self,path="",pin=[],nombre=""):
         self.path=path
         self.pin=pin
         self.nombre=nombre
-        self.sens=Sensores()
+        self.sens=Lectura()
         if nombre == "":
             self.nombre = self.path
         if self.path == "led":
@@ -59,13 +59,13 @@ class sensor:
             self._id=ObjectId
         if self.path == "tmp":
             if len(arreglo) > 1:
-                sensor1=Sensores(self.path,self.nombre,arreglo[0],self.tipoDato[0],cadena_fecha,cadena_fecha_hora,self.pin,)
+                sensor1=Lectura(self.path,self.nombre,arreglo[0],self.tipoDato[0],cadena_fecha,cadena_fecha_hora,self.pin,)
                 data.append(sensor1.getDict())
-                sensor2=Sensores(self.path,self.nombre,arreglo[1],self.tipoDato[1],cadena_fecha,cadena_fecha_hora,self.pin,)
+                sensor2=Lectura(self.path,self.nombre,arreglo[1],self.tipoDato[1],cadena_fecha,cadena_fecha_hora,self.pin,)
                 data.append(sensor2.getDict())
 
         else:
-            sensor1 = Sensores(self.path, self.nombre, arreglo[0], self.tipoDato[0], cadena_fecha, cadena_fecha_hora, self.pin, )
+            sensor1 = Lectura(self.path, self.nombre, arreglo[0], self.tipoDato[0], cadena_fecha, cadena_fecha_hora, self.pin, )
             data.append(sensor1.getDict())
         jsonS = json.dumps(data)
         return jsonS
