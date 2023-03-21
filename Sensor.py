@@ -56,13 +56,13 @@ class Sensor:
 
         if self.key == "tmp":
             if len(arreglo) > 1:
-                sensor1 = Lectura(self.key, self.nombre, arreglo[0], self.tipoDato[0], fecha)
+                sensor1 = Lectura(self.key, self.nombre, self.descripcion, arreglo[0], self.tipoDato[0], fecha)
                 data.append(sensor1.getDict())
-                sensor2 = Lectura(self.key, self.nombre, arreglo[1], self.tipoDato[1], fecha)
+                sensor2 = Lectura(self.key, self.nombre, self.descripcion, arreglo[1], self.tipoDato[1], fecha)
                 data.append(sensor2.getDict())
 
         else:
-            sensor1 = Lectura(self.key, self.nombre, arreglo[0], self.tipoDato[0], fecha)
+            sensor1 = Lectura(self.key, self.nombre, self.descripcion, arreglo[0], self.tipoDato[0], fecha)
             data.append(sensor1.getDict())
 
         jsonS = json.dumps(data)
