@@ -1,27 +1,19 @@
-import time
-from gpiozero import LED
+import RPi.GPIO as GPIO
 
-
-class Led:
+class Led: 
     def __init__(self, pin):
         self.pin = pin
-        self.led = LED(self.pin)
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setup(self.pin, GPIO.OUT)
 
-    def toggle(self):
-        if self.led.is_lit:
-            self.led.off()
-            return 0
+    def encender(self):
+        GPIO.output(self.pin, GPIO.HIGH)
 
-        else:
-            self.led.on()
-            return 1
+    def apagar(self):
+        GPIO.output(self.pin, GPIO.LOW)
 
-    def estado(self):
-        if self.led.is_lit:
-            return 1
-        else:
-            return 0
-
+    def cleanup(self):
+        GPIO.cleanup()
 
 
 
