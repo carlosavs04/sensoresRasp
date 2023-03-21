@@ -1,5 +1,5 @@
-from pssp import Ultrasonico
-from psps import Temperatura
+from Ultrasonico import Ultrasonico
+from Temperatura import Temperatura
 from led import Led
 import time
 import json
