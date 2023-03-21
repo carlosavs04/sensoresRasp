@@ -5,7 +5,7 @@ import time
 import json
 import datetime
 from bson import ObjectId
-from ultimaLectura import Sensores
+from Lectura import Sensores
 class sensor:
     def __init__(self,path="",pin=[],nombre=""):
         self.path=path
@@ -20,16 +20,14 @@ class sensor:
         self._id = ObjectId()
     def tipoSensor(self):
         valores=[]
-        self.tipo=""
 
         if self.path == "ult":
-            self.tipo=["Ultrasonico"]
             sensorUlt = Ultrasonico(self.pin[0], self.pin[1])
             distancia = sensorUlt.medirDistancia()
             valores.append(distancia)
             self.tipoDato=["Cm"]
         elif self.path=="tmp":
-            self.tipo=["Temperatura","Humedad"]
+
             self.tipoDato=["°C"," h"]
             sensor = Temperatura(self.pin[0])
             hum, temp = sensor.medirTemperatura()
@@ -38,7 +36,6 @@ class sensor:
                 valores.append(temp)
 
         elif self.path=="led":
-            self.tipo=["Led"]
             stat = self.led1.toggle()
             if stat == 1:
                 self.tipoDato= ["On"]
@@ -62,13 +59,13 @@ class sensor:
             self._id=ObjectId
         if self.path == "tmp":
             if len(arreglo) > 1:
-                sensor1=Sensores(self.path,self.nombre,self.tipo[0],arreglo[0],self.tipoDato[0],cadena_fecha,cadena_fecha_hora,self.pin,)
+                sensor1=Sensores(self.path,self.nombre,arreglo[0],self.tipoDato[0],cadena_fecha,cadena_fecha_hora,self.pin,)
                 data.append(sensor1.to_dict())
-                sensor2=Sensores(self.path,self.nombre,self.tipo[1],arreglo[1],self.tipoDato[1],cadena_fecha,cadena_fecha_hora,self.pin,)
+                sensor2=Sensores(self.path,self.nombre,arreglo[1],self.tipoDato[1],cadena_fecha,cadena_fecha_hora,self.pin,)
                 data.append(sensor2.to_dict())
 
         else:
-            sensor1 = Sensores(self.path, self.nombre, self.tipo[0], arreglo[0], self.tipoDato[0], cadena_fecha, cadena_fecha_hora, self.pin, )
+            sensor1 = Sensores(self.path, self.nombre, arreglo[0], self.tipoDato[0], cadena_fecha, cadena_fecha_hora, self.pin, )
             data.append(sensor1.to_dict())
         jsonS = json.dumps(data)
         return jsonS

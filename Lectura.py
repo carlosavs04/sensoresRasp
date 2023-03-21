@@ -1,16 +1,11 @@
 from Lista import Lista
 from bson import ObjectId
 
-#clave = nombre que viene desde arduino
-#nombre= nombre que el usuario da
-#valor = pos el valor que tiene el sensor
-
 class Sensores(Lista):
-    def __init__(self,clave="", nombre="", tipo= "", valores="", dato="", fecha="",hora="", pines = ""):
+    def __init__(self, key="", nombre="", valores="", dato="", fecha="",hora="", pines = ""):
         super().__init__("Sensores.json")
         self.nombre=nombre
-        self.clave=clave
-        self.tipo=tipo
+        self.key=key
         self.valores=valores
         self.dato=dato
         self.fecha=fecha
@@ -19,7 +14,7 @@ class Sensores(Lista):
         self._id = ObjectId()
 
     def __str__(self):
-        return f"{self.clave},{self.nombre},{self.tipo},{self.valores},{self.dato},{self.fecha},{self.hora},{self.pines}"
+        return f"{self.key},{self.nombre},{self.valores},{self.dato},{self.fecha},{self.hora},{self.pines}"
 
     def to_dict(self):
         listaDicc = []
@@ -34,8 +29,8 @@ class Sensores(Lista):
             listaDicc.append(self.listas)
         else:
             if self.nombre=="":
-                self.nombre=self.clave
-            diccionario = {'_id': str(self._id),"clave":self.clave, "nombre": self.nombre, "tipo":self.tipo , "valores":self.valores, "dato": self.dato,"fecha":self.fecha,"hora":self.hora,"pines":self.pines}
+                self.nombre=self.key
+            diccionario = {'_id': str(self._id),"key":self.key, "nombre": self.nombre, "valores":self.valores, "fecha":self.fecha,"hora":self.hora,"pines":self.pines}
             listaDicc.append(diccionario)
             return diccionario
 
@@ -43,6 +38,6 @@ class Sensores(Lista):
         sensor_json = self.json.readDocument()
         sensor_obj = []
         for sensor in sensor_json:
-            cli = Sensores(sensor["clave"], sensor["nombre"], sensor["tipo"], sensor["valores"], sensor["dato"], sensor["fecha"], sensor["hora"], sensor["pines"])
+            cli = Sensores(sensor["key"], sensor["nombre"], sensor["valores"], sensor["fecha"], sensor["hora"], sensor["pines"])
             sensor_obj.append(cli)
         return sensor_obj
