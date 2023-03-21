@@ -89,7 +89,7 @@ class Menu:
                         print("|{:<3} | {:<20} | {:<25} | {:<7}{:<4} | {:<10} | ".format(z, i["nombre"],i["descripcion"],i["valores"],i["dato"],i["fecha"]))
                         self.lectura.agregar(i)
                         if self.bandera2==1:
-                            self.guardar(i)
+                            self.guardarArchivo(i)
 
     def encenderLed(self):
         self.led.encender()
@@ -97,27 +97,31 @@ class Menu:
     def apagarLed(self):
         self.led.apagar()
 
-    def guardar(self,sensor):
+    def enter(self):
+        self.enter_pressed = False
+        keyboard.wait('enter')
+        self.enter_pressed = True
 
-        if self.mongo.insert_one(self.collecion,sensor) is False:  # si no se inserto, debe cambiar la bandera
+    def guardarArchivo(self, datos):
+        if self.mongo.insert_one(self.collecion, datos) is False: 
             self.bandera2 = 2
-            print("Se perdio la conexion, guardando solo localmente")
-            ultimoSensor = sensor  # guarda la lecutra donde sucede la desconexion
-            self.lectura.clearFile("Sensores.json")  # borra datos para no repetirlos
-            self.lectura.agregar(ultimoSensor)
-            self.sensoresLectura()  # debe regresar al metodo para empezar a guardar solo local
+            print("La conexión con la base de datos no se pudo establecer. Guardando en archivo...")
 
-    def hiloBorrarPTiempo(self):
-        timer = threading.Timer(self.wait, self.hiloBorrarPTiempo)
+            ultimoSensor = datos
+            self.lectura.clearFile("Sensores.json")
+            self.lectura.agregar(ultimoSensor)
+            self.medirTodos()
+
+    def borrarHilo(self):
+        timer = threading.Timer(self.wait, self.borrarHilo)
         timer.start()
 
-        if self.bandera2 == 1:  # si esta en conexion
-            self.timer_count += 1  # incrementa el contador de tiempo
-            if self.timer_count >= self.wait / 60:  # verifica si han pasado 15 minutos
+        if self.bandera2 == 1:
+            self.timer_count += 1
+            if self.timer_count >= self.wait / 60:
                 self.lectura.clearFile("Sensores.json")
-                print("Se borro historial local")
-                print("---------------------------------------------------------------")
-                self.timer_count = 0  # resetea el contador de tiempo
+                print("Historial local eliminado")
+                self.timer_count = 0 
         else:
             print("Se reinicio el contador")
             self.timer_count = 0
