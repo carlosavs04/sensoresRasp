@@ -30,7 +30,7 @@ class Sensores(Lista):
         else:
             if self.nombre=="":
                 self.nombre=self.key
-            diccionario = {'_id': str(self._id),"key":self.key, "nombre": self.nombre, "valores":self.valores, "fecha":self.fecha,"hora":self.hora,"pines":self.pines}
+            diccionario = {'_id': str(self._id),"key":self.key, "nombre": self.nombre, "valores":self.valores, "dato": self.dato,"fecha":self.fecha,"hora":self.hora,"pines":self.pines}
             listaDicc.append(diccionario)
             return diccionario
 
@@ -38,6 +38,6 @@ class Sensores(Lista):
         sensor_json = self.json.readDocument()
         sensor_obj = []
         for sensor in sensor_json:
-            cli = Sensores(sensor["key"], sensor["nombre"], sensor["valores"], sensor["fecha"], sensor["hora"], sensor["pines"])
+            cli = Sensores(sensor["key"], sensor["nombre"], sensor["valores"], sensor["dato"], sensor["fecha"], sensor["hora"], sensor["pines"])
             sensor_obj.append(cli)
         return sensor_obj
