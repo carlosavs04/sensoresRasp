@@ -88,7 +88,7 @@ class Menu:
                 data=json.loads(sens.lectura())
                 if len(data)>=1:
                     for i in data:
-                        print(f"{i['nombre']} \t \t {i['descripcion']} \t \t {i['valores']} \t \t {i['dato']} \t \t {i['fecha']}")
+                        print(f"{i['nombre']} \t {i['descripcion']} \t {i['valores']} \t {i['dato']} \t {i['fecha']}")
                         self.lectura.agregar(i)
                         if self.bandera2 == 1:
                             self.guardarArchivo(i)
