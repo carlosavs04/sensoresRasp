@@ -57,7 +57,7 @@ class main:
                 data=json.loads(sens.lectura())
                 if len(data)>=1:
                     for i in data:
-                        print("|{:<3} | {:<20} | {:<25} | {:<7}{:<4} | {:<10} | {:<10} | {:<5}|".format(z, i["nombre"],i["descripcion"],i["valores"],i["dato"],i["fecha"]))
+                        print("|{:<3} | {:<20} | {:<25} | {:<7}{:<4} | {:<10} |".format(z, i["nombre"],i["descripcion"],i["valores"],i["dato"],i["fecha"]))
                         self.sensores.agregar(i)
                         if self.bandera2==1:
                             self.guardar(i)
