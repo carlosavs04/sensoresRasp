@@ -6,7 +6,6 @@ from prettytable import PrettyTable
 import threading
 import time
 import json
-import keyboard
 
 class Menu:
     def __init__(self):
