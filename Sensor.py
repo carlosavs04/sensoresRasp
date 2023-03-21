@@ -20,14 +20,14 @@ class Sensor:
         valores = []
 
         if self.key == "ult":
-            sensorUltrasonico = Ultrasonico(self.pin[0], self.pin[1])
+            sensorUltrasonico = Ultrasonico(self.pines[0], self.pines[1])
             distancia = sensorUltrasonico.medirDistancia()
             valores.append(distancia)
             self.tipoDato=["cm"]
 
         elif self.key == "tmp":
             self.tipoDato = ["°C","%"]
-            sensorDht = Temperatura(self.pin[0])
+            sensorDht = Temperatura(self.pines[0])
             hum, temp = sensorDht.medirTemperatura()
             if hum is not None and temp is not None:
                 valores.append(hum)
@@ -64,6 +64,6 @@ class Sensor:
         else:
             sensor1 = Lectura(self.key, self.nombre, arreglo[0], self.tipoDato[0], fecha)
             data.append(sensor1.getDict())
-            
+
         jsonS = json.dumps(data)
         return jsonS
