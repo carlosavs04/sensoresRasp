@@ -1,5 +1,5 @@
-from ultrasonico import UltrasonicSensor
-from temperatura import temperatura
+from Ultrasonico import Ultrasonico
+from Temperatura import Temperatura
 from led import Led
 import time
 import json
@@ -24,14 +24,14 @@ class sensor:
 
         if self.path == "ult":
             self.tipo=["Ultrasonico"]
-            sensorUlt = UltrasonicSensor(trigger_pin=self.pin[0], echo_pin=self.pin[1])
+            sensorUlt = Ultrasonico(trigger_pin=self.pin[0], echo_pin=self.pin[1])
             distancia = sensorUlt.medirDistancia()
             valores.append(distancia)
             self.tipoDato=["Cm"]
         elif self.path=="tmp":
             self.tipo=["Temperatura","Humedad"]
             self.tipoDato=["°C"," h"]
-            sensor = temperatura(self.pin[0])
+            sensor = Temperatura(self.pin[0])
             hum, temp = sensor.lectura()
             if hum is not None and temp is not None:
                 valores.append(hum)
