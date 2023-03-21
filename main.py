@@ -1,5 +1,5 @@
 import time
-from conecMongo import MongoConexion
+from MongoDB import MongoDB
 from sensores import sensor
 import json
 from ultimaLectura import Sensores
@@ -9,7 +9,7 @@ class main:
         self.sensores = Sensores()
         self.bandera = 0
         self.dispositivo = ""
-        self.obj = MongoConexion()
+        self.obj = MongoDB()
         self.tiempoEspera = 120  # tiempo en segundos
         self.timer_count = 0  # contador de tiempo para borrar historial local
         self.veces = 2
@@ -48,7 +48,7 @@ class main:
                         pass
                     else:
                         self.obj.insert_one(self.colecion, x)
-                self.sensores.borrarInfo("Sensores.json")
+                self.sensores.clearFile("Sensores.json")
             self.hiloBorrarPTiempo()
         while True:
             for sens in sensores:
@@ -79,7 +79,7 @@ class main:
             self.bandera2 = 2
             print("Se perdio la conexion, guardando solo localmente")
             ultimoSensor = sensor  # guarda la lecutra donde sucede la desconexion
-            self.sensores.borrarInfo("Sensores.json")  # borra datos para no repetirlos
+            self.sensores.clearFile("Sensores.json")  # borra datos para no repetirlos
             self.sensores.agregar(ultimoSensor)
             self.sensoresLectura()  # debe regresar al metodo para empezar a guardar solo local
 
@@ -112,7 +112,7 @@ class main:
         if self.bandera2 == 1:  # si esta en conexion
             self.timer_count += 1  # incrementa el contador de tiempo
             if self.timer_count >= self.tiempoEspera / 60:  # verifica si han pasado 15 minutos
-                self.sensores.borrarInfo("Sensores.json")
+                self.sensores.clearFile("Sensores.json")
                 print("Se borro historial local")
                 print("---------------------------------------------------------------")
                 self.timer_count = 0  # resetea el contador de tiempo

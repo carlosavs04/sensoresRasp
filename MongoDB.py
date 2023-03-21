@@ -1,8 +1,6 @@
 import pymongo
-from pymongo.server_api import ServerApi
 
-
-class MongoConexion:
+class MongoDB:
     def __init__(self):
         self.client = ""
         self.db = ""
@@ -19,42 +17,34 @@ class MongoConexion:
             return False
         
     def insert_one(self, collection, data):
-        coll = self.db[collection]
-        coll.insert_one(data)
+        col = self.db[collection]
+        col.insert_one(data)
         if self.find_one(collection,data):
             return True
         else:
             return False
 
     def insert_many(self, collection, data_list):
-        coll = self.db[collection]
-        result = coll.insert_many(data_list)
+        col = self.db[collection]
+        result = col.insert_many(data_list)
         return result.acknowledged
 
     def find_one(self, collection, query={}):
-        coll = self.db[collection]
-        return coll.find_one(query)
+        col = self.db[collection]
+        return col.find_one(query)
 
     def find_many(self, collection, query={}):
-        coll = self.db[collection]
-        return coll.find(query)
+        col = self.db[collection]
+        return col.find(query)
 
     def update_one(self, collection, query, new_values):
-        coll = self.db[collection]
-        coll.update_one(query, {"$set": new_values})
+        col = self.db[collection]
+        col.update_one(query, {"$set": new_values})
 
     def delete_one(self, collection, query):
-        coll = self.db[collection]
-        coll.delete_one(query)
+        col = self.db[collection]
+        col.delete_one(query)
 
     def delete_many(self, collection, query):
-        coll = self.db[collection]
-        coll.delete_many(query)
-
-
-if __name__ == "__main__":
-    #mongodb+srv://admin:root@cluster0.hcy4jnm.mongodb.net/?retryWrites=true&w=majority
-
-    mongo_object = MongoConexion("mongodb+srv://admin:root@cluster0.hcy4jnm.mongodb.net/?retryWrites=true&w=majority","Prueba","cluster0")
-    datos={"codigo": "2333", "nombre": "214", "descripcion": "32", "precio": 23, "stat": 2}
-    print(mongo_object.getStatus())
+        col = self.db[collection]
+        col.delete_many(query)

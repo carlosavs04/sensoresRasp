@@ -40,7 +40,7 @@ class Sensores(Lista):
             return diccionario
 
     def from_json(self):
-        sensor_json = self.json.leer_de_json()
+        sensor_json = self.json.readDocument()
         sensor_obj = []
         for sensor in sensor_json:
             cli = Sensores(sensor["clave"], sensor["nombre"], sensor["tipo"], sensor["valores"], sensor["dato"], sensor["fecha"], sensor["hora"], sensor["pines"])
