@@ -81,9 +81,7 @@ class Menu:
 
                 self.lectura.clearFile("Sensores.json")
             self.borrarHilo()
-
-        enter_thread = threading.Thread(target=self.enter)
-        enter_thread.start()    
+ 
         while True:
             for sens in sensores:
                 z=z+1
@@ -100,11 +98,6 @@ class Menu:
 
     def apagarLed(self):
         self.led.apagar()
-
-    def enter(self):
-        self.enter_pressed = False
-        keyboard.wait('enter')
-        self.enter_pressed = True
 
     def guardarArchivo(self, datos):
         if self.mongo.insert_one(self.collecion, datos) is False: 
