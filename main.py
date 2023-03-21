@@ -87,7 +87,7 @@ class main:
         print("----------------------------------------------")
         print("Sistema de gestión de dispositivos raspberry")
         if self.veces == 2:
-            conexion = self.obj.conectar()
+            conexion = self.obj.createConnection()
             if conexion is not False:
                 self.bandera2 = 1
                 print(f"Estado: {self.bandera}")
