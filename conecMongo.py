@@ -5,12 +5,12 @@ from pymongo.server_api import ServerApi
 class MongoConexion:
     def __init__(self):
         self.client = ""
-        self.database = ""
+        self.db = ""
 
     def createConnection(self):
         try:
             self.client = pymongo.MongoClient("mongodb+srv://root:admin@cluster0.jrax7sh.mongodb.net/?retryWrites=true&w=majority")
-            self.database = self.client["Raspberry"]
+            self.db = self.client["Raspberry"]
             print("Conexión exitosa.")
             return True
         
