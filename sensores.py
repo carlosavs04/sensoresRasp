@@ -32,7 +32,7 @@ class sensor:
             self.tipo=["Temperatura","Humedad"]
             self.tipoDato=["°C"," h"]
             sensor = Temperatura(self.pin[0])
-            hum, temp = sensor.lectura()
+            hum, temp = sensor.medirTemperatura()
             if hum is not None and temp is not None:
                 valores.append(hum)
                 valores.append(temp)
