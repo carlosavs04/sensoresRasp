@@ -34,11 +34,9 @@ class main:
                 input("Presione Enter para continuar...")
 
     def sensoresLectura(self):
-        temp = Sensor("tmp", [4], "Cocina")
-        ult = Sensor("ult",[23,24],"Puerta")
-        led = Sensor("led",[17],"Foco")
-        sensores=[temp,led, ult]
-        # sensores=[temp]
+        ult = Sensor("ult", [23, 24], "Sensor ultrasonico", "Sensor para medir distancia")
+        temp = Sensor("tmp", [4], "Sensor DHT11", "Sensor para medir temperatura y humedad")
+        sensores=[temp, ult]
         z=0
         if self.bandera2 == 1:  # si esta en conexion
             lista = self.sensores.mostrar()
@@ -57,7 +55,7 @@ class main:
                 data=json.loads(sens.lectura())
                 if len(data)>=1:
                     for i in data:
-                        print("|{:<3} | {:<20} | {:<25} | {:<7}{:<4} | {:<10} | {:<10} | {:<5}|".format(z, i["nombre"],i["descripcion"],i["valores"],i["dato"],i["fecha"]))
+                        print("|{:<3} | {:<20} | {:<25} | {:<7}{:<4} | {:<10} | ".format(z, i["nombre"],i["descripcion"],i["valores"],i["dato"],i["fecha"]))
                         self.sensores.agregar(i)
                         if self.bandera2==1:
                             self.guardar(i)
