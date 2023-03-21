@@ -59,13 +59,13 @@ class sensor:
             self._id=ObjectId
         if self.path == "tmp":
             if len(arreglo) > 1:
-                sensor1=Lectura(self.path,self.nombre,arreglo[0],self.tipoDato[0],cadena_fecha,cadena_fecha_hora,self.pin,)
+                sensor1=Lectura(self.path,self.nombre,arreglo[0],self.tipoDato[0],cadena_fecha)
                 data.append(sensor1.getDict())
-                sensor2=Lectura(self.path,self.nombre,arreglo[1],self.tipoDato[1],cadena_fecha,cadena_fecha_hora,self.pin,)
+                sensor2=Lectura(self.path,self.nombre,arreglo[1],self.tipoDato[1],cadena_fecha)
                 data.append(sensor2.getDict())
 
         else:
-            sensor1 = Lectura(self.path, self.nombre, arreglo[0], self.tipoDato[0], cadena_fecha, cadena_fecha_hora, self.pin, )
+            sensor1 = Lectura(self.path, self.nombre, arreglo[0], self.tipoDato[0], cadena_fecha)
             data.append(sensor1.getDict())
         jsonS = json.dumps(data)
         return jsonS
