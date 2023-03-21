@@ -2,6 +2,7 @@ from Sensor import Sensor
 from Led import Led
 from Lectura import Lectura
 from MongoDB import MongoDB
+from prettytable import PrettyTable
 import threading
 import time
 import json
@@ -67,9 +68,10 @@ class Menu:
     def medirTodos(self):
         ult = Sensor("ult", [23, 24], "Sensor ultrasonico", "Sensor para medir distancia")
         temp = Sensor("tmp", [4], "Sensor DHT11", "Sensor para medir temperatura y humedad")
+        tabla = PrettyTable()
+        tabla.field_names = ["Nombre", "Descripción", "Valores", "Tipo de dato", "Fecha"]
 
         sensores = [temp, ult]
-        z=0
         if self.bandera2 == 1:
             listaSensores = self.lectura.mostrar()
             if len(listaSensores) >= 1: 
@@ -88,7 +90,7 @@ class Menu:
                 data=json.loads(sens.lectura())
                 if len(data)>=1:
                     for i in data:
-                        print(f"{i['nombre']} \t {i['descripcion']} \t {i['valores']} \t {i['dato']} \t {i['fecha']}")
+                        tabla.add_row([i["nombre"], i["descripcion"], i["valor"], i["tipo"], i["fecha"]])
                         self.lectura.agregar(i)
                         if self.bandera2 == 1:
                             self.guardarArchivo(i)
