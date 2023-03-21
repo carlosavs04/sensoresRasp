@@ -67,22 +67,26 @@ class Menu:
     def medirTodos(self):
         ult = Sensor("ult", [23, 24], "Sensor ultrasonico", "Sensor para medir distancia")
         temp = Sensor("tmp", [4], "Sensor DHT11", "Sensor para medir temperatura y humedad")
-        sensores=[temp, ult]
+
+        sensores = [temp, ult]
         z=0
-        if self.bandera2 == 1:  # si esta en conexion
-            lista = self.lectura.mostrar()
-            if len(lista) >= 1:  # si la lista de sensores tiene objetos, debe ingresarlos a la bd antes de los otros
-                for x in lista:
-                    if self.mongo.find_one(self.collecion, x):
+        if self.bandera2 == 1:
+            listaSensores = self.lectura.mostrar()
+            if len(listaSensores) >= 1: 
+                for i in listaSensores:
+                    if self.mongo.find_one(self.collecion, i):
                         pass
                     else:
-                        self.mongo.insert_one(self.collecion, x)
+                        self.mongo.insert_one(self.collecion, i)
+
                 self.lectura.clearFile("Sensores.json")
             self.borrarHilo()
+
+        enter_thread = threading.Thread(target=self.enter)
+        enter_thread.start()    
         while True:
             for sens in sensores:
                 z=z+1
-                # print(sens.lectura())
                 data=json.loads(sens.lectura())
                 if len(data)>=1:
                     for i in data:
