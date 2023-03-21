@@ -89,6 +89,7 @@ class Menu:
                 if len(data)>=1:
                     for i in data:
                         tabla.add_row([i["nombre"], i["descripcion"], i["valores"], i["dato"], i["fecha"]])
+                        print(tabla)
                         self.lectura.agregar(i)
                         if self.bandera2 == 1:
                             self.guardarArchivo(i)
