@@ -24,7 +24,7 @@ class sensor:
 
         if self.path == "ult":
             self.tipo=["Ultrasonico"]
-            sensorUlt = Ultrasonico(trigger_pin=self.pin[0], echo_pin=self.pin[1])
+            sensorUlt = Ultrasonico(self.pin[0], self.pin[1])
             distancia = sensorUlt.medirDistancia()
             valores.append(distancia)
             self.tipoDato=["Cm"]
