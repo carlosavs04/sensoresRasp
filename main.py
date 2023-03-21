@@ -2,11 +2,11 @@ import time
 from MongoDB import MongoDB
 from sensores import sensor
 import json
-from Lectura import Sensores
+from Lectura import Lectura
 import threading
 class main:
     def __init__(self):
-        self.sensores = Sensores()
+        self.sensores = Lectura()
         self.bandera = 0
         self.dispositivo = ""
         self.obj = MongoDB()
@@ -57,18 +57,7 @@ class main:
                 data=json.loads(sens.lectura())
                 if len(data)>=1:
                     for i in data:
-                        # print(i)
-                        # i es el json
-                        if len(i["pines"]) == 1:
-                            # print(i["nombre"])
-                            # print(i["tipo"])
-                            # print(i["valores"])
-                            # print(i["dato"])
-                            # print(i["fecha"])
-                            # print(i["pines"][0])
-                            print("|{:<3} | {:<20} | {:<25} | {:<7}{:<4} | {:<10} | {:<10} | {:<5}|".format(z, i["nombre"],i["valores"],i["dato"],i["fecha"],i["hora"],i["pines"][0]))
-                        elif len(i["pines"]) == 2:
-                            print("|{:<3} | {:<20} | {:<25} | {:<7}{:<4} | {:<10} | {:<2} {:<2}|".format(z,i["nombre"],i["valores"],i["dato"],i["fecha"],i["hora"],i["pines"][0],i["pines"][1]))
+                        print("|{:<3} | {:<20} | {:<25} | {:<7}{:<4} | {:<10} | {:<10} | {:<5}|".format(z, i["nombre"],i["descripcion"],i["valores"],i["dato"],i["fecha"]))
                         self.sensores.agregar(i)
                         if self.bandera2==1:
                             self.guardar(i)
