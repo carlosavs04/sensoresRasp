@@ -4,49 +4,20 @@ from pymongo.server_api import ServerApi
 
 class MongoConexion:
     def __init__(self, url, dbname, cluster):
-        self.url = url
-        self.dbname = dbname
-        self.cluster=cluster
-        self.client=None
-        self.db=None
-    def conect(self):
-        self.client = pymongo.MongoClient(self.url, server_api=ServerApi('1'))
+        self.client = ""
+        self.database = ""
+
+    def createConnection(self):
         try:
-            self.client.server_info()
+            self.client = pymongo.MongoClient("mongodb+srv://root:admin@cluster0.jrax7sh.mongodb.net/?retryWrites=true&w=majority")
+            self.database = self.client["Raspberry"]
+            print("Conexión exitosa.")
+            return True
+        
         except Exception as e:
-            print("Error en datos")
-        else:
-            print(f"Conectado al cliente MongoDB {self.cluster}")
-            print(f"Buscando bd {self.dbname}....")
-            if self.dbname in self.client.list_database_names():
-                self.db = self.client[self.dbname]
-                print(f"Conectado a {self.dbname}")
-            else:
-                print(f"Base de datos no encontrada")
-                print(f"Creando base de datos {self.dbname} ")
-                self.db = self.client[self.dbname]
-                print(f"Bd {self.dbname} creada y conectada")
-
-    def getStatus(self):
-        self.client = pymongo.MongoClient(self.url, server_api=ServerApi('1'))
-        try:
-            self.client.server_info()
-        except Exception as e:
-            return "Desconectado"
-        else:
-            return "Conectado"
-
-    def getError(self):
-        self.client = pymongo.MongoClient(self.url, server_api=ServerApi('1'))
-        try:
-            self.client.server_info()
-
-        except Exception as e:
-            pass
-        else:
-            return "Conectado"
-
-
+            print("Error al conectar a la base de datos: ", e)
+            return False
+        
     def insert_one(self, collection, data):
         coll = self.db[collection]
         coll.insert_one(data)

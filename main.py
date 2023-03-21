@@ -1,6 +1,5 @@
 import time
-from interBD import interBD
-from Mongo import Mongo
+from conecMongo import MongoConexion
 from sensores import sensor
 import json
 from ultimaLectura import Sensores
@@ -10,8 +9,7 @@ class main:
         self.sensores = Sensores()
         self.bandera = 0
         self.dispositivo = ""
-        self.mongo = Mongo()
-        self.obj = Mongo()
+        self.obj = MongoConexion()
         self.tiempoEspera = 120  # tiempo en segundos
         self.timer_count = 0  # contador de tiempo para borrar historial local
         self.veces = 2
@@ -27,10 +25,6 @@ class main:
             opcion = self.menu()
             if opcion == "1":
                 self.sensoresLectura()
-            if opcion == "2":
-                interBD().mainBd()
-            # elif opcion == "7":
-            #     self.juntos()
             elif opcion == "5":
                 # Salir
                 print("Saliendo del sistema...")
@@ -40,7 +34,7 @@ class main:
                 input("Presione Enter para continuar...")
 
     def sensoresLectura(self):
-        temp = sensor("tmp", [5], "Cocina")
+        temp = sensor("tmp", [4], "Cocina")
         ult = sensor("ult",[23,24],"Puerta")
         led = sensor("led",[17],"Foco")
         sensores=[temp,led, ult]
@@ -93,13 +87,9 @@ class main:
         print("----------------------------------------------")
         print("Sistema de gestión de dispositivos raspberry")
         if self.veces == 2:
-            resultado = interBD().checkarConexionEnUso()
-            if resultado:
+            conexion = self.obj.conectar()
+            if conexion is not False:
                 self.bandera2 = 1
-                self.obj = resultado[0]
-                self.obj.conect()
-                self.bandera = resultado[1]
-                print(f"Datos de conexion: {self.obj.user}-{self.obj.cluster}-{self.obj.bd}------")
                 print(f"Estado: {self.bandera}")
                 self.veces = 1
 
@@ -114,12 +104,6 @@ class main:
         print("----------------------------")
         opcion = input("Seleccione una opción: ")
         return opcion
-
-    def ultimaLectura(self):
-        sensores = self.sensores.from_json()
-        print("|{:<25} {:<5}|".format("Sensor", "Valor"))
-        for sens in sensores:
-            print("|{:<25} {:<5}|".format(sens.nombre, sens.valor))
 
     def hiloBorrarPTiempo(self):
         timer = threading.Timer(self.tiempoEspera, self.hiloBorrarPTiempo)
