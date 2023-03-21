@@ -78,7 +78,7 @@ class Menu:
                     else:
                         self.mongo.insert_one(self.collecion, x)
                 self.lectura.clearFile("Sensores.json")
-            self.hiloBorrarPTiempo()
+            self.borrarHilo()
         while True:
             for sens in sensores:
                 z=z+1
